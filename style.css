@@ -1,8 +1,7 @@
 /* ============================================================
-   ТЁМНЫЙ МИНИМАЛИЗМ — DATA-ЖУРНАЛИСТИКА
+   ТЁМНЫЙ МИНИМАЛИЗМ — DATA-ЖУРНАЛИСТИКА (FULL WIDTH)
    ============================================================ */
 
-/* --- СБРОС И БАЗА ----------------------------------------- */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -18,7 +17,6 @@
     --accent-alt: #5ec4c4;
     --border:     #333336;
     --radius:     6px;
-    --max-width:  720px;
 }
 
 html {
@@ -33,14 +31,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* --- СТАТЬЯ ----------------------------------------------- */
 article {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 80px 24px 100px;
+    padding: 80px 60px 100px;
 }
 
-/* --- ЗАГОЛОВКИ -------------------------------------------- */
 h1 {
     font-size: 2.6rem;
     font-weight: 800;
@@ -69,7 +63,6 @@ h3 {
     color: var(--accent);
 }
 
-/* --- ПАРАГРАФЫ -------------------------------------------- */
 p {
     margin-bottom: 18px;
     color: var(--text);
@@ -82,7 +75,6 @@ p.lead {
     margin-bottom: 50px;
 }
 
-/* --- ССЫЛКИ ----------------------------------------------- */
 a {
     color: var(--accent-alt);
     text-decoration: none;
@@ -94,7 +86,6 @@ a:hover {
     border-bottom-color: var(--accent-alt);
 }
 
-/* --- ФИГУРЫ И IFRAME -------------------------------------- */
 figure {
     margin: 40px 0;
 }
@@ -110,7 +101,6 @@ iframe {
     background: var(--surface);
 }
 
-/* --- ФУТЕР ------------------------------------------------ */
 footer {
     margin-top: 80px;
     padding-top: 30px;
@@ -126,32 +116,4 @@ footer p {
 .date {
     color: var(--text-muted);
     font-style: italic;
-}
-
-/* --- АДАПТИВ ---------------------------------------------- */
-@media (max-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-
-    article {
-        padding: 40px 16px 60px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.4rem;
-        margin-top: 50px;
-    }
-
-    iframe {
-        height: 450px !important;
-    }
-
-    p.lead {
-        font-size: 1.05rem;
-    }
 }
