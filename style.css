@@ -1,0 +1,157 @@
+/* ============================================================
+   ТЁМНЫЙ МИНИМАЛИЗМ — DATA-ЖУРНАЛИСТИКА
+   ============================================================ */
+
+/* --- СБРОС И БАЗА ----------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg:         #1a1a1c;
+    --surface:    #222225;
+    --text:       #c9c9cc;
+    --text-muted: #8e8e93;
+    --accent:     #f0c040;
+    --accent-alt: #5ec4c4;
+    --border:     #333336;
+    --radius:     6px;
+    --max-width:  720px;
+}
+
+html {
+    font-size: 18px;
+    background: var(--bg);
+    color: var(--text);
+}
+
+body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- СТАТЬЯ ----------------------------------------------- */
+article {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px 24px 100px;
+}
+
+/* --- ЗАГОЛОВКИ -------------------------------------------- */
+h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-top: 70px;
+    margin-bottom: 20px;
+    padding-top: 24px;
+    border-top: 2px solid var(--border);
+    color: #fff;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    color: var(--accent);
+}
+
+/* --- ПАРАГРАФЫ -------------------------------------------- */
+p {
+    margin-bottom: 18px;
+    color: var(--text);
+}
+
+p.lead {
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+    margin-bottom: 50px;
+}
+
+/* --- ССЫЛКИ ----------------------------------------------- */
+a {
+    color: var(--accent-alt);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+a:hover {
+    border-bottom-color: var(--accent-alt);
+}
+
+/* --- ФИГУРЫ И IFRAME -------------------------------------- */
+figure {
+    margin: 40px 0;
+}
+
+figcaption {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+iframe {
+    background: var(--surface);
+}
+
+/* --- ФУТЕР ------------------------------------------------ */
+footer {
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+footer p {
+    margin-bottom: 8px;
+}
+
+.date {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* --- АДАПТИВ ---------------------------------------------- */
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    article {
+        padding: 40px 16px 60px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+        margin-top: 50px;
+    }
+
+    iframe {
+        height: 450px !important;
+    }
+
+    p.lead {
+        font-size: 1.05rem;
+    }
+}
