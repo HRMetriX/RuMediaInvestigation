@@ -75,6 +75,11 @@ p.lead {
     margin-bottom: 50px;
 }
 
+strong {
+    color: #e0d8c8;
+    font-weight: 600;
+}
+
 a {
     color: var(--accent-alt);
     text-decoration: none;
