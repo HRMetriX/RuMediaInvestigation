@@ -34,6 +34,34 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* --- ДИСКЛЕЙМЕР -------------------------------------------- */
+.disclaimer {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 18px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.82rem;
+    color: #7a7a86;
+    line-height: 1.55;
+    border-bottom: 1px solid var(--border);
+    background: rgba(212, 168, 83, 0.03);
+}
+
+.disclaimer-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+@media (max-width: 768px) {
+    .disclaimer {
+        padding: 14px 16px;
+        font-size: 0.78rem;
+    }
+}
+
 /* --- СТАТЬЯ ----------------------------------------------- */
 article {
     max-width: var(--max-width);
