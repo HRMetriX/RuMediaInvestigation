@@ -1,1 +1,1 @@
-# RuMediaInvestigatin
+# RuMediaInvestigation
