@@ -1,7 +1,8 @@
 /* ============================================================
-   ТЁМНЫЙ МИНИМАЛИЗМ — DATA-ЖУРНАЛИСТИКА (FULL WIDTH)
+   ТЁМНЫЙ DATA-ДЕТЕКТИВ — ДИЗАЙН-СИСТЕМА
    ============================================================ */
 
+/* --- СБРОС И БАЗА ----------------------------------------- */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -9,14 +10,16 @@
 }
 
 :root {
-    --bg:         #1a1a1c;
-    --surface:    #222225;
-    --text:       #c9c9cc;
-    --text-muted: #8e8e93;
-    --accent:     #f0c040;
-    --accent-alt: #5ec4c4;
-    --border:     #333336;
-    --radius:     6px;
+    --bg:         #0d0d0f;
+    --surface:    #161619;
+    --surface-2:  #1e1e22;
+    --text:       #b0b0b8;
+    --text-muted: #6b6b76;
+    --accent:     #d4a853;
+    --accent-alt: #5e9c9c;
+    --border:     #25252a;
+    --radius:     8px;
+    --max-width:  800px;
 }
 
 html {
@@ -27,70 +30,203 @@ html {
 
 body {
     font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-    line-height: 1.7;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
 }
 
+/* --- СТАТЬЯ ----------------------------------------------- */
 article {
-    padding: 80px 60px 100px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px 28px 100px;
 }
 
+/* --- ЗАГОЛОВКИ -------------------------------------------- */
 h1 {
-    font-size: 2.6rem;
+    font-size: 2.8rem;
     font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
-    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    color: #f0f0f0;
 }
 
 h2 {
     font-size: 1.7rem;
     font-weight: 700;
     letter-spacing: -0.01em;
-    margin-top: 70px;
-    margin-bottom: 20px;
-    padding-top: 24px;
-    border-top: 2px solid var(--border);
-    color: #fff;
+    margin-top: 80px;
+    margin-bottom: 24px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    color: #e8e8ec;
 }
 
 h3 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    margin-top: 36px;
-    margin-bottom: 12px;
+    margin-top: 44px;
+    margin-bottom: 14px;
     color: var(--accent);
+    letter-spacing: 0.02em;
 }
 
+/* --- ПАРАГРАФЫ -------------------------------------------- */
 p {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     color: var(--text);
 }
 
 p.lead {
-    font-size: 1.2rem;
-    line-height: 1.55;
-    color: var(--text-muted);
-    margin-bottom: 50px;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #8e8e9a;
+    margin-bottom: 60px;
 }
 
-strong {
-    color: #e0d8c8;
-    font-weight: 600;
-}
-
+/* --- ССЫЛКИ ----------------------------------------------- */
 a {
     color: var(--accent-alt);
     text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
+    border-bottom: 1px solid rgba(94, 156, 156, 0.3);
+    transition: border-color 0.2s, color 0.2s;
 }
 
 a:hover {
-    border-bottom-color: var(--accent-alt);
+    color: #7ec8c8;
+    border-bottom-color: rgba(94, 156, 156, 0.7);
 }
 
+/* --- АКЦЕНТНЫЕ ЦИФРЫ И ВЫДЕЛЕНИЯ ------------------------- */
+strong {
+    color: #e8e0d0;
+    font-weight: 600;
+}
+
+/* --- КАРТОЧКИ ДЛЯ КЛЮЧЕВЫХ МЕТРИК ------------------------- */
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+}
+
+.metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+}
+
+.metric-card .metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e8e0d0;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.metric-card .metric-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* --- ЦИТАТНЫЕ ВСТАВКИ (примеры статей) -------------------- */
+.example-block {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-style: italic;
+    color: #9a9aa4;
+}
+
+.example-block .example-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+/* --- ВАЖНЫЙ АБЗАЦ С АКЦЕНТНОЙ ПОЛОСОЙ -------------------- */
+.insight {
+    border-left: 2px solid var(--accent-alt);
+    padding-left: 20px;
+    margin: 28px 0;
+    color: #c4c4cc;
+}
+
+/* --- НУМЕРОВАННЫЕ ВЫВОДЫ ---------------------------------- */
+.conclusions-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+}
+
+.conclusions-list li {
+    counter-increment: conclusion-counter;
+    position: relative;
+    padding-left: 48px;
+    margin-bottom: 28px;
+}
+
+.conclusions-list li::before {
+    content: counter(conclusion-counter);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 32px;
+    height: 32px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.conclusions-list li strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1.05rem;
+}
+
+/* --- ССЫЛКИ НА ОТЧЁТЫ ------------------------------------- */
+.report-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--accent-alt);
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-bottom: none;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.report-link:hover {
+    background: var(--surface-2);
+    border-color: var(--accent-alt);
+    border-bottom: none;
+}
+
+.report-link::after {
+    content: " →";
+    opacity: 0.6;
+}
+
+/* --- ФИГУРЫ И IFRAME -------------------------------------- */
 figure {
     margin: 40px 0;
 }
@@ -98,17 +234,19 @@ figure {
 figcaption {
     font-size: 0.85rem;
     color: var(--text-muted);
-    margin-top: 10px;
-    line-height: 1.5;
+    margin-top: 12px;
+    line-height: 1.55;
 }
 
 iframe {
     background: var(--surface);
+    border-radius: var(--radius);
 }
 
+/* --- ФУТЕР ------------------------------------------------ */
 footer {
-    margin-top: 80px;
-    padding-top: 30px;
+    margin-top: 100px;
+    padding-top: 32px;
     border-top: 1px solid var(--border);
     font-size: 0.85rem;
     color: var(--text-muted);
@@ -116,9 +254,56 @@ footer {
 
 footer p {
     margin-bottom: 8px;
+    color: var(--text-muted);
+}
+
+footer a {
+    color: var(--accent-alt);
 }
 
 .date {
     color: var(--text-muted);
     font-style: italic;
+    margin-top: 16px;
+}
+
+/* --- АДАПТИВ ---------------------------------------------- */
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    article {
+        padding: 40px 16px 60px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.35rem;
+        margin-top: 56px;
+    }
+
+    iframe {
+        height: 420px !important;
+    }
+
+    p.lead {
+        font-size: 1.1rem;
+    }
+
+    .metric-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .metric-card {
+        padding: 14px 16px;
+    }
+
+    .metric-card .metric-value {
+        font-size: 1.5rem;
+    }
 }
