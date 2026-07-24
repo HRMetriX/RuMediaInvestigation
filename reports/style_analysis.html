@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Анализ стиля — Сакина Нуриева</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#0d1117; color:#c9d1d9; font-family:'Segoe UI',Arial,sans-serif; line-height:1.6; }
+    .container { max-width:1200px; margin:0 auto; padding:30px 20px; }
+    h1 { color:#FF6B6B; font-size:28px; margin-bottom:5px; }
+    h2 { color:#4ECDC4; font-size:22px; margin:40px 0 15px; border-bottom:1px solid #30363d; padding-bottom:8px; }
+    h3 { color:#FFEAA7; font-size:17px; margin:25px 0 10px; }
+    .subtitle { color:#8b949e; font-size:14px; margin-bottom:30px; }
+    table { width:100%; border-collapse:collapse; margin:15px 0; font-size:13px; }
+    th { background:#161b22; color:#FFEAA7; padding:10px 12px; text-align:left; border-bottom:2px solid #30363d; }
+    td { padding:8px 12px; border-bottom:1px solid #21262d; }
+    tr:hover { background:#161b22; }
+    .num { text-align:right; font-family:monospace; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:10px; padding:20px; margin:20px 0; }
+    .card h3 { margin-top:0; }
+    .badge { display:inline-block; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:bold; }
+    .gray { color:#8b949e; }
+    .green { color:#3fb950; }
+    .red { color:#FF6B6B; }
+    .yellow { color:#FFEAA7; }
+    .big-num { font-size:32px; font-weight:bold; }
+    .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin:20px 0; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin:20px 0; }
+    .cluster-dot { display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:6px; }
+    .article-item { padding:6px 10px; margin:4px 0; border-left:3px solid #30363d; font-size:13px; }
+    .elbow-chart { background:#161b22; border-radius:10px; padding:20px; }
+    @media (max-width:700px) { .grid-2,.grid-3 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔬 Анализ стиля: Сакина Нуриева</h1>
+<p class="subtitle">
+    Кластеризация 206 статей автора для поиска подгрупп.<br>
+    Если статьи распадаются на чёткие кластеры — под именем автора могут работать несколько человек.
+</p>
+
+<div class="grid-3">
+    <div class="card" style="text-align:center;">
+        <div class="big-num" style="color:#4ECDC4;">206</div>
+        <div class="gray">статей</div>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="big-num" style="color:#FFEAA7;">4</div>
+        <div class="gray">оптимальных кластеров</div>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="big-num" style="color:#FF6B6B;">2000</div>
+        <div class="gray">TF-IDF признаков</div>
+    </div>
+</div>
+
+<h2>1. Метод локтя — поиск оптимального k</h2>
+<div class="card">
+    <p>Инерция K-Means для разного числа кластеров. Оптимальное k = 4 — точка, где рост качества замедляется.</p>
+    <table style="max-width:400px;">
+        <tr><th>k</th><th class="num">Инерция</th><th>Δ</th></tr>
+<tr ><td>1</td><td class='num'>190.6</td><td class='num'>0.0</td></tr><tr ><td>2</td><td class='num'>185.3</td><td class='num'>5.4</td></tr><tr ><td>3</td><td class='num'>180.5</td><td class='num'>4.8</td></tr><tr style='font-weight:bold;color:#FFEAA7;'><td>4</td><td class='num'>176.2</td><td class='num'>4.3</td></tr><tr ><td>5</td><td class='num'>173.6</td><td class='num'>2.6</td></tr><tr ><td>6</td><td class='num'>171.8</td><td class='num'>1.8</td></tr><tr ><td>7</td><td class='num'>169.7</td><td class='num'>2.0</td></tr><tr ><td>8</td><td class='num'>166.5</td><td class='num'>3.2</td></tr></table></div><h2>2. Состав кластеров</h2><div class='grid-2'>
+        <div class='card'>
+            <h3><span class='cluster-dot' style='background:#FF6B6B;'></span>Кластер 1: 41 статей</h3>
+            <table>
+                <tr><td>Средняя длина</td><td class='num'>1127 симв.</td></tr>
+                <tr><td>Компактность</td><td class='num'>0.919</td></tr>
+                <tr><td>Топ-рубрики</td><td>army (22), politics (15), social (4)</td></tr>
+                <tr><td>Топ-даты</td><td>2026-07-14 (9), 2026-07-16 (7), 2026-07-17 (5)</td></tr>
+                <tr><td>Топ-слова</td><td style='font-size:12px;'>российские, удары, по, на, для, украины, всу, области</td></tr>
+            </table>
+        </div>
+        
+        <div class='card'>
+            <h3><span class='cluster-dot' style='background:#4ECDC4;'></span>Кластер 2: 13 статей</h3>
+            <table>
+                <tr><td>Средняя длина</td><td class='num'>1186 симв.</td></tr>
+                <tr><td>Компактность</td><td class='num'>0.717</td></tr>
+                <tr><td>Топ-рубрики</td><td>army (10), politics (3)</td></tr>
+                <tr><td>Топ-даты</td><td>2026-07-18 (6), 2026-07-17 (3), 2026-07-13 (1)</td></tr>
+                <tr><td>Топ-слова</td><td style='font-size:12px;'>ирана, об, этом, что, не, 18, июля, ударов</td></tr>
+            </table>
+        </div>
+        
+        <div class='card'>
+            <h3><span class='cluster-dot' style='background:#FFEAA7;'></span>Кластер 3: 122 статей</h3>
+            <table>
+                <tr><td>Средняя длина</td><td class='num'>1102 симв.</td></tr>
+                <tr><td>Компактность</td><td class='num'>0.958</td></tr>
+                <tr><td>Топ-рубрики</td><td>politics (63), social (32), army (15)</td></tr>
+                <tr><td>Топ-даты</td><td>2026-07-16 (22), 2026-07-20 (19), 2026-07-14 (18)</td></tr>
+                <tr><td>Топ-слова</td><td style='font-size:12px;'>заявил, что, для, об, этом, на, по, июля</td></tr>
+            </table>
+        </div>
+        
+        <div class='card'>
+            <h3><span class='cluster-dot' style='background:#DDA0DD;'></span>Кластер 4: 30 статей</h3>
+            <table>
+                <tr><td>Средняя длина</td><td class='num'>1037 симв.</td></tr>
+                <tr><td>Компактность</td><td class='num'>0.868</td></tr>
+                <tr><td>Топ-рубрики</td><td>army (13), social (13), politics (3)</td></tr>
+                <tr><td>Топ-даты</td><td>2026-07-18 (13), 2026-07-22 (6), 2026-07-20 (6)</td></tr>
+                <tr><td>Топ-слова</td><td style='font-size:12px;'>беспилотников, за, над, об, этом, сообщил, губернатор, по</td></tr>
+            </table>
+        </div>
+        </div><h2>3. Визуализация кластеров (PCA)</h2><div class='card'><p>Каждая точка — статья Сакины. Цвет — кластер. Расстояние — стилистическая близость текстов.</p>
+    <svg width="100%" viewBox="0 0 900 500" style="max-width:900px; background:#0d1117; border-radius:8px;">
+        <circle cx="509.8" cy="117.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 1: Турция согласилась предоставить гарантии безопасности для Украины...</title></circle><circle cx="262.8" cy="177.8" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 2: Российские войска поразили сухогруз и катер ВСУ в Черном море...</title></circle><circle cx="484.0" cy="134.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 3: Премьер Польши анонсировал первые учения коалиции желающих по Украине...</title></circle><circle cx="575.7" cy="163.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 4: Дмитриев допустил проблемы для экс-президентов США после обращения Трампа к наци...</title></circle><circle cx="514.4" cy="129.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 5: В России призвали Европу не полагаться на помощь НАТО в случае конфликта...</title></circle><circle cx="527.2" cy="77.0" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 6: В Кремле прокомментировали перестановки в правительстве Украины...</title></circle><circle cx="505.4" cy="122.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 7: В США раскритиковали попытки Запада ослабить Россию...</title></circle><circle cx="513.6" cy="50.0" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 8: В Раде призвали арестовать экс-министра обороны Украины Федорова...</title></circle><circle cx="50.0" cy="247.2" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 9: Губернатор Клычков сообщил об атаках украинских БПЛА на Орловскую область...</title></circle><circle cx="264.1" cy="221.2" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 10: В Краснодаре обломки беспилотника повредили многоквартирный дом...</title></circle><circle cx="114.3" cy="220.6" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 11: В МИД пообещали «отдельный» ответ за атаку украинских беспилотников на Москву...</title></circle><circle cx="190.1" cy="225.8" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 12: Воробьев рассказал о последствиях атаки БПЛА на Московскую область...</title></circle><circle cx="358.5" cy="173.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 13: Более 10 моряков пострадали в Азовском море из-за ВСУ...</title></circle><circle cx="265.5" cy="189.5" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 14: Российские войска уничтожили пусковую установку ракет «Нептун-2»...</title></circle><circle cx="467.9" cy="130.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 15: Главу НИИ Минобороны приговорили к 13 годам за получение взяток...</title></circle><circle cx="392.4" cy="163.1" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 16: На Украине установили лимит выдачи тел военнослужащих ВСУ...</title></circle><circle cx="398.7" cy="157.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 17: Снайпер ВС России назвал слабое место украинской «Бабы-Яги»...</title></circle><circle cx="471.1" cy="121.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 18: Госдума усложнила возвращение иностранного бизнеса в Россию...</title></circle><circle cx="549.7" cy="158.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 19: В Кремле заявили о готовности Путина говорить с Хаменеи...</title></circle><circle cx="345.4" cy="187.1" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 20: На Западе заявили об охоте России на украинские корабли...</title></circle><circle cx="500.4" cy="103.4" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 21: СМИ: новый премьер Украины разорил десятки компаний ради выгоды...</title></circle><circle cx="589.1" cy="179.2" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 22: США одобрили ядерное соглашение с ближневосточной страной...</title></circle><circle cx="491.0" cy="284.5" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 23: В Кувейте обвинили Иран в повреждении ключевого нефтяного объекта...</title></circle><circle cx="478.8" cy="137.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 24: Защитники приграничья наравне с участниками СВО будут получать льготы...</title></circle><circle cx="462.4" cy="140.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 25: Стало известно о планах России и Украины обменяться телами погибших военнослужащ...</title></circle><circle cx="549.1" cy="132.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 26: В Кремле выступили против характеристики России как младшего партнера Китая...</title></circle><circle cx="76.2" cy="246.4" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 27: Следственный комитет РФ возбудил дела после ударов БПЛА по складам Wildberries...</title></circle><circle cx="417.6" cy="144.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 28: Уволен глава Первоуральска...</title></circle><circle cx="590.6" cy="142.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 29: В Китае ответили на утверждение Трампа о якобы вмешательстве Пекина в выборы в С...</title></circle><circle cx="739.3" cy="430.5" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 30: Иран заявил об ударах по объектам армии США в Бахрейне и Кувейте...</title></circle><circle cx="793.1" cy="446.5" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 31: КСИР предупредил США о «суровой расплате»...</title></circle><circle cx="544.4" cy="123.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 32: Патрушев рассказал о своей работе в должности секретаря Совета безопасности РФ...</title></circle><circle cx="539.8" cy="108.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 33: Бывший пресс-секретарь Зеленского рассказала о настоящих целях политика...</title></circle><circle cx="435.4" cy="150.2" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 34: Британия расширила санкционный список против РФ...</title></circle><circle cx="491.8" cy="131.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 35: Euroclear попросил апелляционный суд о приостановлении исполнения по иску ЦБ РФ...</title></circle><circle cx="564.6" cy="126.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 36: Трамп прокомментировал смерть сенатора Грэма...</title></circle><circle cx="511.0" cy="128.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 37: Лавров назвал направление для развития отношений России и Северной Кореи...</title></circle><circle cx="791.1" cy="394.3" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 38: В Иране рассказали о контактах с посредниками по вопросу урегулирования отношени...</title></circle><circle cx="453.3" cy="120.0" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 39: Сырский заявил, что оставляет армию Украины «в состоянии наступления»...</title></circle><circle cx="471.5" cy="133.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 40: Путин поручил усилить помощь раненым бойцам СВО...</title></circle><circle cx="516.5" cy="209.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 41: Снаряд упал на танкер у побережья Омана...</title></circle><circle cx="506.9" cy="143.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 42: В США назвали украинский конфликт «войной роботов»...</title></circle><circle cx="413.5" cy="140.1" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 43: Главе ЕК в ходе визита в Киев пришлось бежать в убежище...</title></circle><circle cx="385.7" cy="152.7" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 44: Украинские военные начали строить оборонительные сооружения под Харьковом...</title></circle><circle cx="544.6" cy="158.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 45: Пентагон получил систему подавления спутников России и Китая...</title></circle><circle cx="502.1" cy="56.4" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 46: Стало известно, кто выполняет обязанности министра обороны Украины после отставк...</title></circle><circle cx="484.9" cy="125.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 47: На Западе рассказали об отчаянном положении армии Украины...</title></circle><circle cx="461.9" cy="146.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 48: VK призвало пользователей перейти на домен .ru после блокировки приложения в Goo...</title></circle><circle cx="573.2" cy="147.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 49: Патрушев обвинил Байдена в ухудшении отношений США с Россией...</title></circle><circle cx="482.1" cy="131.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 50: Врачи прибыли в суд по вызову к политику Надеждину...</title></circle><circle cx="501.0" cy="127.2" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 51: Лавров прокомментировал возможное возобновление зерновой сделки...</title></circle><circle cx="591.1" cy="140.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 52: Рубио подтвердил скорый визит Си Цзиньпина в США...</title></circle><circle cx="506.0" cy="109.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 53: Зеленский готовится продлить мобилизацию и военное положение на Украине...</title></circle><circle cx="337.6" cy="170.4" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 54: Российские военные нанесли групповые удары по Украине...</title></circle><circle cx="175.0" cy="237.2" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 55: Губернатор Слюсарь рассказал об атаке беспилотников на Ростовскую область...</title></circle><circle cx="162.2" cy="233.3" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 56: WB открыла горячую линию для родных сотрудников складов в Котовске и Электростал...</title></circle><circle cx="164.3" cy="213.2" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 57: Над Севастополем уничтожили украинские беспилотники...</title></circle><circle cx="458.7" cy="138.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 58: Совфед одобрил закон о регулировании искусственного интеллекта в России...</title></circle><circle cx="506.0" cy="131.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 59: Лавров рассказал о контактах Путина с лидером Северной Кореи...</title></circle><circle cx="494.9" cy="132.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 60: Известная итальянская актриса планирует получить гражданство России...</title></circle><circle cx="463.7" cy="143.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 61: Суд признал экстремистскими две хакерские группировки за сотрудничество с ВСУ...</title></circle><circle cx="168.0" cy="235.2" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 62: Лантратова пожаловалась ООН на новые атаки ВСУ по регионам России...</title></circle><circle cx="550.7" cy="209.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 63: Россиян в Иордании попросили соблюдать меры предосторожности...</title></circle><circle cx="211.4" cy="216.5" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 64: В Подмосковье произошли изменения в движении общественного транспорта после атак...</title></circle><circle cx="547.8" cy="146.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 65: На Западе упрекнули Германию за размещение у себя ракет Tomahawk...</title></circle><circle cx="467.6" cy="116.0" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 66: Стала известна реакция Федорова на предложение Зеленского по другим должностям...</title></circle><circle cx="466.8" cy="138.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 67: Песня Владимира Высоцкого прозвучала в эфире британского радио...</title></circle><circle cx="547.4" cy="147.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 68: Захарова прокомментировала критику Рубио в адрес Ирана...</title></circle><circle cx="505.8" cy="89.7" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 69: В Европе встревожились из-за отставки Федорова с поста главы минобороны Украины...</title></circle><circle cx="548.7" cy="133.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 70: В Армении одобрили ратификацию соглашения по «Маршруту Трампа»...</title></circle><circle cx="507.6" cy="131.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 71: Журналист Юнашев поделился инсайдом на фоне слухов о визите шефа ФБР в Россию...</title></circle><circle cx="334.9" cy="168.5" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 72: В Чернигове беспилотник упал на административное здание...</title></circle><circle cx="526.9" cy="125.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 73: В МИД КНР рассказали о перспективах продления безвизового режима России и Китая...</title></circle><circle cx="489.9" cy="127.2" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 74: Российские учителя получат дополнительную поддержку от государства...</title></circle><circle cx="483.1" cy="133.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 75: Россия потребовала от ВТО разрешить спор по углеродному регулированию Евросоюза...</title></circle><circle cx="290.9" cy="184.3" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 76: Мэр Сочи рассказал о состоянии пострадавшего при падении обломков БПЛА ребенка...</title></circle><circle cx="529.8" cy="106.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 77: В Кремле прокомментировали призыв Алиева к украинцам «не соглашаться на оккупаци...</title></circle><circle cx="494.5" cy="139.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 78: Захарова обвинила Санду в уничтожении идентичности Молдавии...</title></circle><circle cx="483.4" cy="141.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 79: Детский омбудсмен призвала законодательно закрепить в РФ понятие травли...</title></circle><circle cx="60.0" cy="244.8" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 80: В Ленинградской области объявлен отбой беспилотной опасности...</title></circle><circle cx="409.1" cy="148.3" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 81: В Британии раскрыли число украинских военнослужащих, обученных в королевстве...</title></circle><circle cx="454.5" cy="147.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 82: В Киеве протестуют против подорожания проезда в общественном транспорте...</title></circle><circle cx="134.2" cy="236.8" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 83: Атаку ВСУ на склад Wildberries в Котовске назвали самой масштабной в Тамбовской ...</title></circle><circle cx="419.1" cy="153.2" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 84: Российские военные уничтожили три штурмовые группы ВСУ под Харьковом...</title></circle><circle cx="306.1" cy="204.5" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 85: В Совфеде призвали не запрещать россиянам реализовывать их «право на защиту роди...</title></circle><circle cx="497.0" cy="138.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 86: Китай нарастил закупки российской нефти...</title></circle><circle cx="523.4" cy="135.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 87: В Польше запретили однополые союзы...</title></circle><circle cx="519.7" cy="89.1" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 88: Раскрыта возможная причина перестановки в правительстве Украины...</title></circle><circle cx="541.5" cy="149.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 89: Суд на Кипре отклонил апелляцию на решение об экстрадиции россиянина Актулаева...</title></circle><circle cx="470.8" cy="143.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 90: Продуктовый магазин в центре Москвы закрыли из-за крыс и грязи...</title></circle><circle cx="231.6" cy="232.8" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 91: Вертолет привлекут к ликвидации пожара в Краснодаре после атаки беспилотников...</title></circle><circle cx="540.4" cy="138.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 92: Мерц признал зависимость Германии от российского газа...</title></circle><circle cx="297.5" cy="183.0" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 93: Появились кадры из Одессы после ударов российских войск...</title></circle><circle cx="486.7" cy="113.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 94: В России спрогнозировали срок выплаты Украиной долгов перед Западом...</title></circle><circle cx="505.2" cy="154.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 95: Более 60 сенаторов США поддержали новый пакет санкций против России...</title></circle><circle cx="485.8" cy="146.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 96: В МИД прокомментировали заявлении СВР о планах ФРГ получить доступ к ядерному ор...</title></circle><circle cx="484.6" cy="137.2" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 97: В Польше регистрируется все больше актов агрессии против беженцев с Украины...</title></circle><circle cx="515.7" cy="119.2" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 98: Европейская страна заявила о сохранении соглашений с Россией...</title></circle><circle cx="450.6" cy="143.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 99: Рэпер Птаха прибыл в суд по делу о наркотиках...</title></circle><circle cx="407.5" cy="151.3" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 100: Дроны для ударов по Подмосковью были оснащены иностранной взрывчаткой...</title></circle><circle cx="458.6" cy="139.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 101: Латиноамериканца оштрафовали за нацистский жест в Освенциме...</title></circle><circle cx="310.6" cy="179.2" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 102: Силы РФ нанесли удары по объектам энергетической инфраструктуры на Украине...</title></circle><circle cx="169.6" cy="231.1" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 103: Губернатор Развожаев рассказал о ночных атаках ВСУ на Севастополь...</title></circle><circle cx="401.7" cy="161.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 104: В Минсельхозе пообещали, что удары по Азовскому морю не помешают поставкам продо...</title></circle><circle cx="506.9" cy="93.9" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 105: На Западе исключили вступление Украины в Евросоюз к 2028 году...</title></circle><circle cx="470.7" cy="130.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 106: Лавров призвал Турцию к жесткому сигналу Украине из-за атак на газопровод в Черн...</title></circle><circle cx="498.7" cy="62.2" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 107: Новый премьер Украины предложил Раде кандидатов на должности в правительстве...</title></circle><circle cx="513.3" cy="116.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 108: Полянский обвинил Европу в нежелании признавать преступления Украины против мирн...</title></circle><circle cx="533.8" cy="136.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 109: Президент Ирана примет участие в саммите БРИКС...</title></circle><circle cx="381.3" cy="164.6" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 110: Очередь на проезд по Крымскому мосту устранена...</title></circle><circle cx="268.5" cy="181.6" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 111: Российские войска поразили объекты на Украине...</title></circle><circle cx="480.5" cy="131.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 112: Зеленский прибыл на военный парад в Париже...</title></circle><circle cx="383.4" cy="168.8" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 113: Российские войска ударили по компрессорной станции «Сумская»...</title></circle><circle cx="506.4" cy="129.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 114: Мошенники придумали новую схему обмана с поверкой счетчиков...</title></circle><circle cx="197.0" cy="218.5" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 115: В Подмосковье произошел пожар на территории нефтебазы после падения БПЛА...</title></circle><circle cx="753.4" cy="341.1" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 116: В МИД Ирана пообещали США «теплый прием» в случае новой операции против республи...</title></circle><circle cx="385.9" cy="175.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 117: В аэропорту Краснодара введены временные ограничения на полеты...</title></circle><circle cx="462.5" cy="139.2" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 118: В России топ-менеджера поймали на хищении многомиллиардной суммы...</title></circle><circle cx="448.6" cy="140.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 119: В ГД назвали удаление VK и «Макс» из Google Play очередным эпизодом санкционного...</title></circle><circle cx="214.0" cy="204.8" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 120: Врач рассказал о состоянии мальчика, пострадавшего при атаке украинского беспило...</title></circle><circle cx="150.4" cy="235.7" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 121: Российские войска за сутки сбили свыше 700 украинских беспилотников в зоне СВО...</title></circle><circle cx="445.8" cy="144.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 122: Стало известно о требованиях семей колумбийских наемников от Украины...</title></circle><circle cx="98.4" cy="235.3" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 123: Следственный комитет возбудил дело после атаки беспилотников в Москве и области...</title></circle><circle cx="399.4" cy="155.6" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 124: Сотрудники ФСБ предотвратили теракт в Московской области...</title></circle><circle cx="500.1" cy="149.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 125: СМИ узнали о готовности ЕК изменить пакет антироссийских санкций...</title></circle><circle cx="138.5" cy="238.1" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 126: Воробьев сообщил о пострадавших после падения БПЛА на склад Wildberries в Подмос...</title></circle><circle cx="737.4" cy="425.6" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 127: Взрыв произошел в Саудовской Аравии...</title></circle><circle cx="321.3" cy="187.5" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 128: В «Нафтогазе» рассказали об ударах по объектам в Харьковской области...</title></circle><circle cx="508.0" cy="136.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 129: Аномальная жара повлияла на урожайность во Франции...</title></circle><circle cx="232.5" cy="193.8" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 130: В Краснодарском крае потушили возгорание на НПЗ после падения обломков БПЛА...</title></circle><circle cx="518.6" cy="129.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 131: В Турции обсуждают смену формы правления...</title></circle><circle cx="686.8" cy="369.6" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 132: США в течение пяти часов наносили удары по Ирану...</title></circle><circle cx="507.2" cy="133.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 133: МИД России обвинил Украину в планировании операций террористов в Африке...</title></circle><circle cx="506.9" cy="159.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 134: В Польше рассказали, где хотят разместить постоянную военную базу США...</title></circle><circle cx="494.1" cy="134.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 135: Юрист рассказал, можно ли приходить на работу с питомцами...</title></circle><circle cx="502.2" cy="131.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 136: Премьер Молдавии признался в двойном гражданстве...</title></circle><circle cx="514.4" cy="115.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 137: В Молдавии раскрыли причину присоединения к санкциям против России...</title></circle><circle cx="525.0" cy="111.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 138: Песков ответил на вопрос о «тайной встрече» представителей России и Германии...</title></circle><circle cx="226.1" cy="210.9" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 139: Стало известно количество сбитых дронов над Москвой...</title></circle><circle cx="482.7" cy="143.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 140: Британский подросток попал под суд из-за попытки совершить теракт в мечетях...</title></circle><circle cx="539.2" cy="138.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 141: СМИ узнали о планах Трампа ввести новые пошлины на товары из десятков стран...</title></circle><circle cx="515.3" cy="126.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 142: В Госдуме рассказали, почему американские бренды хотят вернуться в Россию...</title></circle><circle cx="489.5" cy="143.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 143: В России расширят применение искусственного интеллекта в медицине...</title></circle><circle cx="127.5" cy="220.7" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 144: В Подмосковье увеличилось количество пострадавших после атаки украинских БПЛА...</title></circle><circle cx="541.6" cy="92.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 145: В Кремле прокомментировали вступление на должность нового премьер-министра Велик...</title></circle><circle cx="459.7" cy="149.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 146: Грета Тунберг и еще около 40 активистов приклеили себя к асфальту в Берлине...</title></circle><circle cx="426.8" cy="141.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 147: Журналистку Марианну Беленькую заочно приговорили к 10 месяцам колонии...</title></circle><circle cx="223.6" cy="225.2" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 148: Акции российского маркетплейса упали после ударов ВСУ по складам Wildberries...</title></circle><circle cx="491.1" cy="165.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 149: В США самолет приземлился на крышу дома...</title></circle><circle cx="783.7" cy="365.9" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 150: Журналист Карлсон рассказал, что могло бы предотвратить конфликт Ирана и США...</title></circle><circle cx="554.2" cy="146.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 151: Американские СМИ обвинили Трампа в продвижении более 20 компаний...</title></circle><circle cx="301.7" cy="175.4" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 152: Российские войска нанесли новые удары по Одесской области...</title></circle><circle cx="506.4" cy="132.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 153: МИД Германии вызвал посла России...</title></circle><circle cx="536.2" cy="134.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 154: Германия примет участие в «ядерных учениях» Франции...</title></circle><circle cx="522.3" cy="195.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 155: В Британии признали КСИР террористической организацией...</title></circle><circle cx="167.5" cy="219.3" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 156: Жители Брянской области пострадали в результате атак ВСУ...</title></circle><circle cx="410.1" cy="151.3" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 157: Режим повышенной готовности введен в российском регионе в связи с подтоплениями...</title></circle><circle cx="499.0" cy="127.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 158: Компанию армянского оппозиционера Царукяна передали под госуправление...</title></circle><circle cx="439.6" cy="140.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 159: В МИД заявили о готовности России ответить на новые санкции Великобритании...</title></circle><circle cx="419.3" cy="146.7" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 160: ФСБ ликвидировала арендатора склада, где СБУ прятала дроны для теракты в Подмоск...</title></circle><circle cx="438.3" cy="159.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 161: Самолет НАТО пролетел над Черным морем...</title></circle><circle cx="518.5" cy="134.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 162: В Литве заявили об отсутствии прямой угрозы со стороны России...</title></circle><circle cx="487.5" cy="94.7" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 163: СМИ сообщили о скором увольнении Сырского с поста главкома ВСУ...</title></circle><circle cx="474.9" cy="136.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 164: Силовики разработали новые меры борьбы с терроризмом на Кавказе и Каспии...</title></circle><circle cx="351.1" cy="176.0" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 165: Украина столкнулась с проблемой при поставках зерна...</title></circle><circle cx="506.7" cy="149.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 166: Мелания Трамп помогла украинским и российским детям воссоединиться с семьями...</title></circle><circle cx="136.8" cy="233.9" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 167: Число пострадавших в результате удара по складу в Тамбовской области достигло 25...</title></circle><circle cx="684.2" cy="354.8" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 168: Иран заявил о нанесении ударов по Иордании...</title></circle><circle cx="609.6" cy="140.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 169: В США заявили о вмешательстве России в выборы в пользу Трампа...</title></circle><circle cx="219.2" cy="229.1" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 170: На Ставрополье объявили режим ЧС после атаки дронов на логистический комплекс...</title></circle><circle cx="607.9" cy="325.1" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 171: Танкеры подорвались в Ормузском проливе...</title></circle><circle cx="472.5" cy="133.3" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 172: В российском городе снизился топливный ажиотаж на АЗС...</title></circle><circle cx="758.2" cy="413.7" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 173: Иран обвинил США в уничтожении пяти мостов...</title></circle><circle cx="571.0" cy="179.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 174: Стало известно, что Трамп разозлился на Нетаньяху из-за Турции...</title></circle><circle cx="596.6" cy="169.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 175: В Тегеране анонсировали визит Лаврова в Иран...</title></circle><circle cx="468.3" cy="121.1" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 176: В Кремле ответили на демарш стран Балтии по украинским беспилотникам...</title></circle><circle cx="502.7" cy="135.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 177: В Минобороны Белоруссии заявили, что не фиксируют на границе агрессивных действи...</title></circle><circle cx="480.6" cy="129.7" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 178: В СК рассказали о вербовке российских подростков через мемы...</title></circle><circle cx="473.2" cy="138.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 179: Галерею Лувра откроют спустя девять месяцев после ограбления...</title></circle><circle cx="357.7" cy="164.5" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 180: На Западе предрекли скорый крах украинской армии...</title></circle><circle cx="476.5" cy="126.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 181: В МВД опровергли информацию о проблемах с загранпаспортами...</title></circle><circle cx="311.5" cy="186.2" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 182: Власти Одесской области подтвердили удары по портовой инфраструктуре...</title></circle><circle cx="390.0" cy="156.5" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 183: Сумские полицейские случайно показали секретный склад ВСУ...</title></circle><circle cx="528.3" cy="162.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 184: США ужесточили визовый режим для ряда категорий иностранцев...</title></circle><circle cx="432.7" cy="157.0" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 185: В Британии заявили о неспособности Украины предотвратить российские удары...</title></circle><circle cx="570.2" cy="331.5" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 186: В Кувейте заявили о пожаре после ударов Ирана...</title></circle><circle cx="474.0" cy="140.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 187: Умер первый зампредседателя правления торгово-промышленной палаты Татарстана...</title></circle><circle cx="480.5" cy="147.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 188: В Иерусалиме нашли балки времен храма царя Соломона...</title></circle><circle cx="496.4" cy="62.1" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 189: Зеленский выбрал нового секретаря СНБО...</title></circle><circle cx="515.5" cy="129.5" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 190: В Госдуме отреагировали на шествие в защиту напавшего на россиянку грузина...</title></circle><circle cx="484.2" cy="90.9" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 191: В Раде назвали имя главного кандидата пост министра обороны Украины...</title></circle><circle cx="479.7" cy="126.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 192: Надеждин пожаловался на повышенное давление во время слушания в суде...</title></circle><circle cx="484.3" cy="128.0" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 193: Пашинян рассказал подписчикам, что читает во время отпуска...</title></circle><circle cx="492.9" cy="176.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 194: ВС Йемена нанесли удар по собственному аэропорту...</title></circle><circle cx="529.6" cy="111.9" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 195: Президент Азербайджана обратился к украинцам...</title></circle><circle cx="464.8" cy="130.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 196: Космонавт получил звание Героя России...</title></circle><circle cx="502.0" cy="120.4" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 197: Европейская страна определила дату начала поставок на Украину баллистических рак...</title></circle><circle cx="749.7" cy="396.5" r="4" fill="#4ECDC4" opacity="0.8"><title>Статья 198: В Иране заявили об увеличении числа жертв после новых ударов США по стране...</title></circle><circle cx="483.9" cy="135.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 199: МОК отказался менять позицию по России после письма из Европы...</title></circle><circle cx="378.4" cy="156.1" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 200: Гендиректору предприятия ВПК предъявили обвинение после удара ВС РФ по складам п...</title></circle><circle cx="112.1" cy="250.6" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 201: Скончался один пострадавший в результате удара ВСУ по Подмосковью...</title></circle><circle cx="369.5" cy="154.6" r="4" fill="#FF6B6B" opacity="0.8"><title>Статья 202: Зеленский после ударов ВС РФ по Киеву призвал ЕС скорее принять новый пакет санк...</title></circle><circle cx="299.9" cy="182.5" r="4" fill="#DDA0DD" opacity="0.8"><title>Статья 203: Wildberries изменил правила на логистических объектах в целях обеспечения безопа...</title></circle><circle cx="449.2" cy="159.8" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 204: Десятки туристов отравились в отеле Турции...</title></circle><circle cx="552.3" cy="149.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 205: В США призвали Вашингтон перестать инвестировать в оборону ЕС...</title></circle><circle cx="529.1" cy="159.6" r="4" fill="#FFEAA7" opacity="0.8"><title>Статья 206: МИД Франции вызвал поверенного в делах Ирана в Париже...</title></circle>
+    </svg>
+    <p style='margin-top:10px;'><i>Наведите на точку для просмотра заголовка.</i></p></div><h2>4. Статьи по кластерам</h2><h3><span class='cluster-dot' style='background:#FF6B6B;'></span>Кластер 1 (41 статей)</h3>
+            <div class='article-item'>
+                <span class='gray'>2026-07-16</span> · <span class='badge'>army</span><br>
+                Российские войска поразили сухогруз и катер ВСУ в Черном море
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-16</span> · <span class='badge'>politics</span><br>
+                В Кремле прокомментировали перестановки в правительстве Украины
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-17</span> · <span class='badge'>politics</span><br>
+                В Раде призвали арестовать экс-министра обороны Украины Федорова
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>army</span><br>
+                Российские войска уничтожили пусковую установку ракет «Нептун-2»
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-17</span> · <span class='badge'>army</span><br>
+                На Украине установили лимит выдачи тел военнослужащих ВСУ
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-21</span> · <span class='badge'>politics</span><br>
+                На Западе заявили об охоте России на украинские корабли
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-22</span> · <span class='badge'>politics</span><br>
+                СМИ: новый премьер Украины разорил десятки компаний ради выгоды
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-22</span> · <span class='badge'>army</span><br>
+                Сырский заявил, что оставляет армию Украины «в состоянии наступления»
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-16</span> · <span class='badge'>politics</span><br>
+                Главе ЕК в ходе визита в Киев пришлось бежать в убежище
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-21</span> · <span class='badge'>army</span><br>
+                Украинские военные начали строить оборонительные сооружения под Харьковом
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-16</span> · <span class='badge'>army</span><br>
+                Стало известно, кто выполняет обязанности министра обороны Украины после отставки Федорова
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-14</span> · <span class='badge'>army</span><br>
+                Российские военные нанесли групповые удары по Украине
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-22</span> · <span class='badge'>politics</span><br>
+                Стала известна реакция Федорова на предложение Зеленского по другим должностям
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>politics</span><br>
+                В Европе встревожились из-за отставки Федорова с поста главы минобороны Украины
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-21</span> · <span class='badge'>army</span><br>
+                В Чернигове беспилотник упал на административное здание
+            </div>
+            <p class='gray'>... и ещё 26 статей</p><h3><span class='cluster-dot' style='background:#4ECDC4;'></span>Кластер 2 (13 статей)</h3>
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>army</span><br>
+                В Кувейте обвинили Иран в повреждении ключевого нефтяного объекта
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>army</span><br>
+                Иран заявил об ударах по объектам армии США в Бахрейне и Кувейте
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-17</span> · <span class='badge'>army</span><br>
+                КСИР предупредил США о «суровой расплате»
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-13</span> · <span class='badge'>politics</span><br>
+                В Иране рассказали о контактах с посредниками по вопросу урегулирования отношений с США
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-20</span> · <span class='badge'>politics</span><br>
+                В МИД Ирана пообещали США «теплый прием» в случае новой операции против республики
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>army</span><br>
+                Взрыв произошел в Саудовской Аравии
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-14</span> · <span class='badge'>army</span><br>
+                США в течение пяти часов наносили удары по Ирану
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-17</span> · <span class='badge'>politics</span><br>
+                Журналист Карлсон рассказал, что могло бы предотвратить конфликт Ирана и США
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-21</span> · <span class='badge'>army</span><br>
+                Иран заявил о нанесении ударов по Иордании
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>army</span><br>
+                Танкеры подорвались в Ормузском проливе
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-17</span> · <span class='badge'>army</span><br>
+                Иран обвинил США в уничтожении пяти мостов
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>army</span><br>
+                В Кувейте заявили о пожаре после ударов Ирана
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>army</span><br>
+                В Иране заявили об увеличении числа жертв после новых ударов США по стране
+            </div>
+            <h3><span class='cluster-dot' style='background:#FFEAA7;'></span>Кластер 3 (122 статей)</h3>
+            <div class='article-item'>
+                <span class='gray'>2026-07-16</span> · <span class='badge'>politics</span><br>
+                Турция согласилась предоставить гарантии безопасности для Украины
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-14</span> · <span class='badge'>politics</span><br>
+                Премьер Польши анонсировал первые учения коалиции желающих по Украине
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-14</span> · <span class='badge'>politics</span><br>
+                Дмитриев допустил проблемы для экс-президентов США после обращения Трампа к нации
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-17</span> · <span class='badge'>politics</span><br>
+                В России призвали Европу не полагаться на помощь НАТО в случае конфликта
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-17</span> · <span class='badge'>politics</span><br>
+                В США раскритиковали попытки Запада ослабить Россию
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-14</span> · <span class='badge'>army</span><br>
+                Более 10 моряков пострадали в Азовском море из-за ВСУ
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-20</span> · <span class='badge'>army</span><br>
+                Главу НИИ Минобороны приговорили к 13 годам за получение взяток
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-21</span> · <span class='badge'>army</span><br>
+                Снайпер ВС России назвал слабое место украинской «Бабы-Яги»
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-21</span> · <span class='badge'>business</span><br>
+                Госдума усложнила возвращение иностранного бизнеса в Россию
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-20</span> · <span class='badge'>politics</span><br>
+                В Кремле заявили о готовности Путина говорить с Хаменеи
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-22</span> · <span class='badge'>politics</span><br>
+                США одобрили ядерное соглашение с ближневосточной страной
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-21</span> · <span class='badge'>social</span><br>
+                Защитники приграничья наравне с участниками СВО будут получать льготы
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-16</span> · <span class='badge'>army</span><br>
+                Стало известно о планах России и Украины обменяться телами погибших военнослужащих
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-14</span> · <span class='badge'>politics</span><br>
+                В Кремле выступили против характеристики России как младшего партнера Китая
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-20</span> · <span class='badge'>politics</span><br>
+                Уволен глава Первоуральска
+            </div>
+            <p class='gray'>... и ещё 107 статей</p><h3><span class='cluster-dot' style='background:#DDA0DD;'></span>Кластер 4 (30 статей)</h3>
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>army</span><br>
+                Губернатор Клычков сообщил об атаках украинских БПЛА на Орловскую область
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-22</span> · <span class='badge'>army</span><br>
+                В Краснодаре обломки беспилотника повредили многоквартирный дом
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-20</span> · <span class='badge'>politics</span><br>
+                В МИД пообещали «отдельный» ответ за атаку украинских беспилотников на Москву
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-20</span> · <span class='badge'>army</span><br>
+                Воробьев рассказал о последствиях атаки БПЛА на Московскую область
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>social</span><br>
+                Следственный комитет РФ возбудил дела после ударов БПЛА по складам Wildberries
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-22</span> · <span class='badge'>army</span><br>
+                Губернатор Слюсарь рассказал об атаке беспилотников на Ростовскую область
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>social</span><br>
+                WB открыла горячую линию для родных сотрудников складов в Котовске и Электростали
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-20</span> · <span class='badge'>army</span><br>
+                Над Севастополем уничтожили украинские беспилотники
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>politics</span><br>
+                Лантратова пожаловалась ООН на новые атаки ВСУ по регионам России
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>social</span><br>
+                В Подмосковье произошли изменения в движении общественного транспорта после атак БПЛА
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-21</span> · <span class='badge'>social</span><br>
+                Мэр Сочи рассказал о состоянии пострадавшего при падении обломков БПЛА ребенка
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>social</span><br>
+                В Ленинградской области объявлен отбой беспилотной опасности
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-18</span> · <span class='badge'>army</span><br>
+                Атаку ВСУ на склад Wildberries в Котовске назвали самой масштабной в Тамбовской области
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-21</span> · <span class='badge'>politics</span><br>
+                В Совфеде призвали не запрещать россиянам реализовывать их «право на защиту родины»
+            </div>
+            
+            <div class='article-item'>
+                <span class='gray'>2026-07-22</span> · <span class='badge'>social</span><br>
+                Вертолет привлекут к ликвидации пожара в Краснодаре после атаки беспилотников
+            </div>
+            <p class='gray'>... и ещё 15 статей</p><h2>5. Интерпретация</h2><div class='card'><p>📊 <b>Умеренная кластеризация.</b> Есть основной стиль и небольшие вариации — возможно, разные форматы или тематики.</p></div>
+<p style='margin-top:50px;text-align:center;color:#30363d;font-size:12px;'>
+    TF-IDF + K-Means · 206 статей · 4 кластеров · PCA-визуализация
+</p>
+</div>
+</body>
+</html>
