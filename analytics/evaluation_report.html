@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Атрибуция авторства — Сакина Нуриева</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#0d1117; color:#c9d1d9; font-family:'Segoe UI',Arial,sans-serif; line-height:1.6; }
+    .container { max-width:1100px; margin:0 auto; padding:30px 20px; }
+    h1 { color:#FF6B6B; font-size:28px; margin-bottom:5px; }
+    h2 { color:#4ECDC4; font-size:22px; margin:40px 0 15px; border-bottom:1px solid #30363d; padding-bottom:8px; }
+    h3 { color:#FFEAA7; font-size:17px; margin:25px 0 10px; }
+    .subtitle { color:#8b949e; font-size:14px; margin-bottom:30px; }
+    table { width:100%; border-collapse:collapse; margin:15px 0; font-size:13px; }
+    th { background:#161b22; color:#FFEAA7; padding:10px 12px; text-align:left; border-bottom:2px solid #30363d; }
+    td { padding:8px 12px; border-bottom:1px solid #21262d; }
+    tr:hover { background:#161b22; }
+    .num { text-align:right; font-family:monospace; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:10px; padding:20px; margin:20px 0; }
+    .card h3 { margin-top:0; }
+    .badge { display:inline-block; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:bold; }
+    .badge-green { background:#3fb95022; color:#3fb950; border:1px solid #3fb950; }
+    .badge-red { background:#FF6B6B22; color:#FF6B6B; border:1px solid #FF6B6B; }
+    .badge-gray { background:#8b949e22; color:#8b949e; border:1px solid #8b949e; }
+    .gray { color:#8b949e; }
+    .green { color:#3fb950; }
+    .red { color:#FF6B6B; }
+    .yellow { color:#FFEAA7; }
+    .big-num { font-size:32px; font-weight:bold; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin:20px 0; }
+    .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin:20px 0; }
+    .feature-row { display:flex; align-items:center; gap:12px; padding:6px 0; border-bottom:1px solid #21262d; }
+    .feature-rank { width:30px; color:#8b949e; font-size:12px; }
+    .feature-name { flex:1; font-family:monospace; font-size:13px; }
+    .feature-coef { width:80px; text-align:right; font-family:monospace; font-weight:bold; }
+    .feature-cat { width:90px; }
+    .bar-container { flex:1; height:6px; background:#21262d; border-radius:3px; max-width:200px; }
+    .bar-fill { height:100%; border-radius:3px; }
+    .cm-cell { text-align:center; padding:12px 20px; font-size:18px; font-weight:bold; }
+    .cm-good { color:#3fb950; }
+    .cm-bad { color:#FF6B6B; }
+    @media (max-width:700px) { .grid-3,.grid-2 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🧬 Атрибуция авторства: Сакина Нуриева</h1>
+<p class="subtitle">
+    SVM · 8525 признаков · 1154 train / 288 val / 20 blind<br>
+    Символьные n-граммы + служебные слова + пунктуация + длина + синтаксис
+</p>
+
+<div class="grid-3">
+    <div class="card" style="text-align:center;">
+        <div class="big-num" style="color:#4ECDC4;">0.700</div>
+        <div class="gray">F1 (слепой тест)</div>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="big-num" style="color:#FFEAA7;">0.840</div>
+        <div class="gray">ROC-AUC</div>
+    </div>
+    <div class="card" style="text-align:center;">
+        <div class="big-num" style="color:#FF6B6B;">7/10</div>
+        <div class="gray">статей Сакины узнано</div>
+    </div>
+</div>
+<h2>1. Матрицы ошибок</h2><div class='grid-3'>
+        <div class="card">
+            <h3>Train</h3>
+            <table style="margin:0 auto;">
+                <tr><td></td><td class='gray'>Прогноз:<br>Другой</td><td class='gray'>Прогноз:<br>Сакина</td></tr>
+                <tr><td class='gray'>Факт: Другой</td>
+                    <td class='cm-cell cm-good'>TN=534</td>
+                    <td class='cm-cell cm-bad'>FP=47</td></tr>
+                <tr><td class='gray'>Факт: Сакина</td>
+                    <td class='cm-cell cm-bad'>FN=22</td>
+                    <td class='cm-cell cm-good'>TP=551</td></tr>
+            </table>
+            <p style='text-align:center;margin-top:10px;color:#8b949e;font-size:12px;'>
+                F1=0.9411 · ROC-AUC=0.9823 · N=1154
+            </p>
+        </div>
+        
+        <div class="card">
+            <h3>Валидация</h3>
+            <table style="margin:0 auto;">
+                <tr><td></td><td class='gray'>Прогноз:<br>Другой</td><td class='gray'>Прогноз:<br>Сакина</td></tr>
+                <tr><td class='gray'>Факт: Другой</td>
+                    <td class='cm-cell cm-good'>TN=103</td>
+                    <td class='cm-cell cm-bad'>FP=37</td></tr>
+                <tr><td class='gray'>Факт: Сакина</td>
+                    <td class='cm-cell cm-bad'>FN=23</td>
+                    <td class='cm-cell cm-good'>TP=125</td></tr>
+            </table>
+            <p style='text-align:center;margin-top:10px;color:#8b949e;font-size:12px;'>
+                F1=0.8065 · ROC-AUC=0.8601 · N=288
+            </p>
+        </div>
+        
+        <div class="card">
+            <h3>Слепой тест</h3>
+            <table style="margin:0 auto;">
+                <tr><td></td><td class='gray'>Прогноз:<br>Другой</td><td class='gray'>Прогноз:<br>Сакина</td></tr>
+                <tr><td class='gray'>Факт: Другой</td>
+                    <td class='cm-cell cm-good'>TN=7</td>
+                    <td class='cm-cell cm-bad'>FP=3</td></tr>
+                <tr><td class='gray'>Факт: Сакина</td>
+                    <td class='cm-cell cm-bad'>FN=3</td>
+                    <td class='cm-cell cm-good'>TP=7</td></tr>
+            </table>
+            <p style='text-align:center;margin-top:10px;color:#8b949e;font-size:12px;'>
+                F1=0.7000 · ROC-AUC=0.8400 · N=20
+            </p>
+        </div>
+        </div><h2>2. Топ-признаки Сакины Нуриевой</h2><p class='gray'>Что модель считает характерным для стиля этого автора (положительные коэффициенты).</p>
+            <div class='feature-row'>
+                <div class='feature-rank'>1</div>
+                <div class='feature-name' title=' отм'> отм</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.7326</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:100%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>2</div>
+                <div class='feature-name' title='ожи'>ожи</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.6547</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:89%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>3</div>
+                <div class='feature-name' title=' бел'> бел</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.6457</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:88%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>4</div>
+                <div class='feature-name' title='ый д'>ый д</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.6419</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:87%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>5</div>
+                <div class='feature-name' title='ля '>ля </div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.6380</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:87%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>6</div>
+                <div class='feature-name' title='прия'>прия</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.6002</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:81%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>7</div>
+                <div class='feature-name' title='рми'>рми</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5984</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:81%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>8</div>
+                <div class='feature-name' title='ое '>ое </div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5911</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:80%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>9</div>
+                <div class='feature-name' title='POS_CCONJ'>POS_CCONJ</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5805</div>
+                <span class='badge badge-gray'>часть речи</span>
+                <div class='bar-container'><div class='bar-fill' style='width:79%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>10</div>
+                <div class='feature-name' title='а так'>а так</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5750</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:78%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>11</div>
+                <div class='feature-name' title='зет'>зет</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5669</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:77%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>12</div>
+                <div class='feature-name' title='сь в '>сь в </div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5664</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:77%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>13</div>
+                <div class='feature-name' title='чал'>чал</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5541</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:75%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>14</div>
+                <div class='feature-name' title='чить '>чить </div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5541</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:75%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>15</div>
+                <div class='feature-name' title='у к'>у к</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5447</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:74%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>16</div>
+                <div class='feature-name' title='струк'>струк</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5421</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:74%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>17</div>
+                <div class='feature-name' title=' (всу'> (всу</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5362</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:73%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>18</div>
+                <div class='feature-name' title='нский'>нский</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5347</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:72%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>19</div>
+                <div class='feature-name' title='вки'>вки</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5339</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:72%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>20</div>
+                <div class='feature-name' title='году '>году </div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5335</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:72%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>21</div>
+                <div class='feature-name' title='ом р'>ом р</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5335</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:72%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>22</div>
+                <div class='feature-name' title='ечи'>ечи</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5300</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:72%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>23</div>
+                <div class='feature-name' title='для'>для</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5266</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:71%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>24</div>
+                <div class='feature-name' title='ву '>ву </div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5253</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:71%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>25</div>
+                <div class='feature-name' title=' ново'> ново</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5245</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:71%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>26</div>
+                <div class='feature-name' title='групп'>групп</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5165</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:70%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>27</div>
+                <div class='feature-name' title='ых с'>ых с</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5101</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:69%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>28</div>
+                <div class='feature-name' title='вых '>вых </div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5079</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:69%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>29</div>
+                <div class='feature-name' title='е л'>е л</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5045</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:68%;background:#3fb950;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>30</div>
+                <div class='feature-name' title='омоб'>омоб</div>
+                <div class='feature-coef' style='color:#3fb950;'>+0.5042</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:68%;background:#3fb950;'></div></div>
+            </div>
+            <h2>3. Анти-признаки (характерны для других авторов)</h2><p class='gray'>Отрицательные коэффициенты — эти признаки модель связывает с НЕ-Сакиной.</p>
+            <div class='feature-row'>
+                <div class='feature-rank'>1</div>
+                <div class='feature-name' title='оизош'>оизош</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5967</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:100%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>2</div>
+                <div class='feature-name' title='len_sentences'>len_sentences</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5617</div>
+                <span class='badge badge-gray'>длина</span>
+                <div class='bar-container'><div class='bar-fill' style='width:94%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>3</div>
+                <div class='feature-name' title=', р'>, р</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5554</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:93%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>4</div>
+                <div class='feature-name' title='ел '>ел </div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5554</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:93%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>5</div>
+                <div class='feature-name' title='е ста'>е ста</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5517</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:92%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>6</div>
+                <div class='feature-name' title='л с'>л с</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5499</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:92%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>7</div>
+                <div class='feature-name' title='зош'>зош</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5379</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:90%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>8</div>
+                <div class='feature-name' title=' во '> во </div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5193</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:87%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>9</div>
+                <div class='feature-name' title='циа'>циа</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5179</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:86%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>10</div>
+                <div class='feature-name' title='но,'>но,</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5157</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:86%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>11</div>
+                <div class='feature-name' title='о, '>о, </div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5157</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:86%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>12</div>
+                <div class='feature-name' title='й пе'>й пе</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.5095</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:85%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>13</div>
+                <div class='feature-name' title='льной'>льной</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4942</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:82%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>14</div>
+                <div class='feature-name' title='аправ'>аправ</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4860</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:81%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>15</div>
+                <div class='feature-name' title='я в с'>я в с</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4816</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:80%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>16</div>
+                <div class='feature-name' title='е при'>е при</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4708</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:78%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>17</div>
+                <div class='feature-name' title='по ег'>по ег</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4695</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:78%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>18</div>
+                <div class='feature-name' title='стоя'>стоя</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4676</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:78%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>19</div>
+                <div class='feature-name' title='также'>также</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4651</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:77%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>20</div>
+                <div class='feature-name' title='ие к'>ие к</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4631</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:77%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>21</div>
+                <div class='feature-name' title='ылко'>ылко</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4606</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:77%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>22</div>
+                <div class='feature-name' title='едв'>едв</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4598</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:77%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>23</div>
+                <div class='feature-name' title='ближ'>ближ</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4564</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:76%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>24</div>
+                <div class='feature-name' title='зда'>зда</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4557</div>
+                <span class='badge badge-gray'>служебное</span>
+                <div class='bar-container'><div class='bar-fill' style='width:76%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>25</div>
+                <div class='feature-name' title='рита'>рита</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4481</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:75%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>26</div>
+                <div class='feature-name' title='тому'>тому</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4470</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:74%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>27</div>
+                <div class='feature-name' title=' ук'> ук</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4465</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:74%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>28</div>
+                <div class='feature-name' title=', как'>, как</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4448</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:74%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>29</div>
+                <div class='feature-name' title='систематически'>систематически</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4386</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:73%;background:#FF6B6B;'></div></div>
+            </div>
+            
+            <div class='feature-row'>
+                <div class='feature-rank'>30</div>
+                <div class='feature-name' title='стран'>стран</div>
+                <div class='feature-coef' style='color:#FF6B6B;'>-0.4370</div>
+                <span class='badge badge-gray'>n-грамма</span>
+                <div class='bar-container'><div class='bar-fill' style='width:73%;background:#FF6B6B;'></div></div>
+            </div>
+            <h2>4. Важность групп признаков</h2><p class='gray'>Средний абсолютный коэффициент по каждой группе. Чем выше — тем важнее группа для модели.</p><table><tr><th>Группа</th><th class='num'>Признаков</th><th class='num'>Средний |coef|</th><th>Визуализация</th></tr>
+        <tr>
+            <td>Длина</td>
+            <td class='num'>6</td>
+            <td class='num' style='font-weight:bold;'>0.166072</td>
+            <td><div style='display:flex;gap:2px;align-items:center;'>
+                <div style='width:94%;height:10px;background:#4ECDC4;border-radius:5px;min-width:2px;'></div>
+                <span style='font-size:11px;color:#8b949e;'>0.1661</span>
+            </div></td>
+        </tr>
+        
+        <tr>
+            <td>Пунктуация</td>
+            <td class='num'>8</td>
+            <td class='num' style='font-weight:bold;'>0.063674</td>
+            <td><div style='display:flex;gap:2px;align-items:center;'>
+                <div style='width:36%;height:10px;background:#4ECDC4;border-radius:5px;min-width:2px;'></div>
+                <span style='font-size:11px;color:#8b949e;'>0.0637</span>
+            </div></td>
+        </tr>
+        
+        <tr>
+            <td>Символьные n-граммы</td>
+            <td class='num'>1263</td>
+            <td class='num' style='font-weight:bold;'>0.109102</td>
+            <td><div style='display:flex;gap:2px;align-items:center;'>
+                <div style='width:61%;height:10px;background:#4ECDC4;border-radius:5px;min-width:2px;'></div>
+                <span style='font-size:11px;color:#8b949e;'>0.1091</span>
+            </div></td>
+        </tr>
+        
+        <tr>
+            <td>Синтаксис (структура)</td>
+            <td class='num'>3</td>
+            <td class='num' style='font-weight:bold;'>0.131602</td>
+            <td><div style='display:flex;gap:2px;align-items:center;'>
+                <div style='width:74%;height:10px;background:#4ECDC4;border-radius:5px;min-width:2px;'></div>
+                <span style='font-size:11px;color:#8b949e;'>0.1316</span>
+            </div></td>
+        </tr>
+        
+        <tr>
+            <td>Синтаксис (части речи)</td>
+            <td class='num'>10</td>
+            <td class='num' style='font-weight:bold;'>0.176083</td>
+            <td><div style='display:flex;gap:2px;align-items:center;'>
+                <div style='width:100%;height:10px;background:#4ECDC4;border-radius:5px;min-width:2px;'></div>
+                <span style='font-size:11px;color:#8b949e;'>0.1761</span>
+            </div></td>
+        </tr>
+        
+        <tr>
+            <td>Служебные слова</td>
+            <td class='num'>7224</td>
+            <td class='num' style='font-weight:bold;'>0.124465</td>
+            <td><div style='display:flex;gap:2px;align-items:center;'>
+                <div style='width:70%;height:10px;background:#4ECDC4;border-radius:5px;min-width:2px;'></div>
+                <span style='font-size:11px;color:#8b949e;'>0.1245</span>
+            </div></td>
+        </tr>
+        
+        <tr>
+            <td>Служебные слова (группы)</td>
+            <td class='num'>11</td>
+            <td class='num' style='font-weight:bold;'>0.048984</td>
+            <td><div style='display:flex;gap:2px;align-items:center;'>
+                <div style='width:27%;height:10px;background:#4ECDC4;border-radius:5px;min-width:2px;'></div>
+                <span style='font-size:11px;color:#8b949e;'>0.0490</span>
+            </div></td>
+        </tr>
+        </table><h2>5. Ключевые выводы</h2><div class='card'><p><b>Самая важная группа:</b> Синтаксис (части речи) (средний |coef| = 0.176083)</p><p style='margin-top:10px;'><b>Что выдаёт Сакину (топ-5):</b></p><ul><li><code> отм</code> <span class='green'>+0.7326</span></li><li><code>ожи</code> <span class='green'>+0.6547</span></li><li><code> бел</code> <span class='green'>+0.6457</span></li><li><code>ый д</code> <span class='green'>+0.6419</span></li><li><code>ля </code> <span class='green'>+0.6380</span></li></ul><p style='margin-top:10px;'><b>Что НЕ свойственно Сакине (топ-5):</b></p><ul><li><code>оизош</code> <span class='red'>-0.5967</span></li><li><code>len_sentences</code> <span class='red'>-0.5617</span></li><li><code>, р</code> <span class='red'>-0.5554</span></li><li><code>ел </code> <span class='red'>-0.5554</span></li><li><code>е ста</code> <span class='red'>-0.5517</span></li></ul></div>
+<p style='margin-top:50px;text-align:center;color:#30363d;font-size:12px;'>
+    SVM · 8525 признаков · 1442 статей · Сакина Нуриева
+</p>
+</div>
+</body>
+</html>

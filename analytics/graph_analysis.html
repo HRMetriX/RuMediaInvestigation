@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аналитика графа новостной повестки</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#0d1117; color:#c9d1d9; font-family:'Segoe UI',Arial,sans-serif; line-height:1.6; }
+    .container { max-width:1200px; margin:0 auto; padding:30px 20px; }
+    h1 { color:#FF6B6B; font-size:28px; margin-bottom:5px; }
+    h2 { color:#4ECDC4; font-size:22px; margin:40px 0 15px; border-bottom:1px solid #30363d; padding-bottom:8px; }
+    h3 { color:#FFEAA7; font-size:17px; margin:25px 0 10px; }
+    table { width:100%; border-collapse:collapse; margin:15px 0; font-size:13px; }
+    th { background:#161b22; color:#FFEAA7; padding:10px 12px; text-align:left; border-bottom:2px solid #30363d; position:sticky; top:0; }
+    td { padding:8px 12px; border-bottom:1px solid #21262d; }
+    tr:hover { background:#161b22; }
+    .num { text-align:right; font-family:monospace; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:10px; padding:20px; margin:20px 0; }
+    .card h3 { margin-top:0; }
+    .badge { display:inline-block; padding:2px 8px; border-radius:20px; font-size:10px; font-weight:bold; margin:0 2px; }
+    .badge-green { background:#3fb95022; color:#3fb950; border:1px solid #3fb950; }
+    .badge-red { background:#FF6B6B22; color:#FF6B6B; border:1px solid #FF6B6B; }
+    .badge-yellow { background:#FFEAA722; color:#FFEAA7; border:1px solid #FFEAA7; }
+    .gray { color:#8b949e; }
+    .green { color:#3fb950; }
+    .red { color:#FF6B6B; }
+    .yellow { color:#FFEAA7; }
+    .big-num { font-size:32px; font-weight:bold; }
+    .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:15px; margin:20px 0; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin:20px 0; }
+    .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin:20px 0; }
+    .interpretation { padding:10px 15px; border-radius:8px; margin:5px 0; font-size:14px; }
+    .stat-table { font-size:12px; }
+    @media (max-width:900px) { .grid-4,.grid-3,.grid-2 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>📊 Аналитика графа новостной повестки</h1>
+<p class="gray">Топ-200 сущностей · порог связи ≥ 10 · Louvain-сообщества · Газета.Ru</p>
+
+<!-- КЛЮЧЕВЫЕ МЕТРИКИ -->
+<div class="grid-4">
+    <div class="card" style="text-align:center;">
+            <div class="big-num" style="color:#4ECDC4;">200</div>
+            <div class="gray">Узлов</div>
+            
+        </div>
+    <div class="card" style="text-align:center;">
+            <div class="big-num" style="color:#45B7D1;">3,381</div>
+            <div class="gray">Рёбер</div>
+            
+        </div>
+    <div class="card" style="text-align:center;">
+            <div class="big-num" style="color:#FFEAA7;">0.1699</div>
+            <div class="gray">Плотность</div>
+            <div style="font-size:12px;color:#8b949e;">умеренная связность — есть кластеры с мостами</div>
+        </div>
+    <div class="card" style="text-align:center;">
+            <div class="big-num" style="color:#FF6B6B;">0.3036</div>
+            <div class="gray">Модулярность</div>
+            <div style="font-size:12px;color:#8b949e;">отличное разделение</div>
+        </div>
+</div>
+
+<div class="grid-2">
+    <div class="card">
+        <h3>🧬 Структура графа</h3>
+        <p><b>Тип:</b> Small-world</p>
+        <p><b>Ассортативность:</b> -0.1655 — hub-and-spoke — хабы собирают вокруг себя мелкие узлы (типично для новостей)</p>
+        <p><b>Кластеризация:</b> 0.0158 — умеренная — темы пересекаются, пузыри не изолированы</p>
+        <p><b>Транзитивность:</b> 0.4365</p>
+        <p><b>Треугольников:</b> 28,854</p>
+        <p><b>Диаметр:</b> 2 · <b>Радиус:</b> 1 · <b>Ср. путь:</b> 0.02</p>
+        <p><b>Центр графа:</b> Россия</p>
+    </div>
+    <div class="card">
+        <h3>🎯 Ключевые игроки</h3>
+        <p><b>🟡 Хаб:</b> Россия (degree=1.000)</p>
+        <p><b>🔵 Мост:</b> Владимир Путин (betw=0.0717)</p>
+        <p><b>🟢 Влиятельный:</b> Россия</p>
+        <p><b>🎭 Дипломат:</b> Россия (part=0.745)</p>
+        <p><b>🔗 Сильнейшая связь:</b> Россия ↔ Украина (2562)</p>
+        <p><b>Рёберная связность:</b> 2</p>
+        <p><b>Точек сочленения:</b> 0</p>
+    </div>
+</div>
+
+<!-- ТОП-СВЯЗИ -->
+<h2>1. Топ-20 связей графа</h2>
+<div class="card">
+    <table>
+        <tr><th>#</th><th>Сущность 1</th><th>Сущность 2</th><th class="num">Вес</th><th></th></tr>
+        
+        <tr>
+            <td>1</td>
+            <td>🌉 Россия</td>
+            <td>↔ Украина</td>
+            <td class="num"><b>2562</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:100px;border-radius:3px;" title="2562 (100.0%)"></span></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td> Россия</td>
+            <td>↔ Москва</td>
+            <td class="num"><b>1741</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:67px;border-radius:3px;" title="1741 (68.0%)"></span></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>🌉 Россия</td>
+            <td>↔ ВСУ</td>
+            <td class="num"><b>1558</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:60px;border-radius:3px;" title="1558 (60.8%)"></span></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td> Россия</td>
+            <td>↔ Владимир Путин</td>
+            <td class="num"><b>1505</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:58px;border-radius:3px;" title="1505 (58.7%)"></span></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>🌉 Россия</td>
+            <td>↔ США</td>
+            <td class="num"><b>1499</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:58px;border-radius:3px;" title="1499 (58.5%)"></span></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td> Киев</td>
+            <td>↔ Украина</td>
+            <td class="num"><b>1419</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:55px;border-radius:3px;" title="1419 (55.4%)"></span></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>🌉 Россия</td>
+            <td>↔ Вооруженные силы</td>
+            <td class="num"><b>1319</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:51px;border-radius:3px;" title="1319 (51.5%)"></span></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>🌉 Россия</td>
+            <td>↔ Киев</td>
+            <td class="num"><b>1175</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:45px;border-radius:3px;" title="1175 (45.9%)"></span></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>🌉 Украина</td>
+            <td>↔ ВСУ</td>
+            <td class="num"><b>1171</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:45px;border-radius:3px;" title="1171 (45.7%)"></span></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td> ВСУ</td>
+            <td>↔ Вооруженные силы</td>
+            <td class="num"><b>1114</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:43px;border-radius:3px;" title="1114 (43.5%)"></span></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td> Украина</td>
+            <td>↔ Владимир Зеленский</td>
+            <td class="num"><b>1093</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:42px;border-radius:3px;" title="1093 (42.7%)"></span></td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>🌉 Украина</td>
+            <td>↔ Вооруженные силы</td>
+            <td class="num"><b>982</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:38px;border-radius:3px;" title="982 (38.3%)"></span></td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>🌉 Россия</td>
+            <td>↔ МИД</td>
+            <td class="num"><b>980</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:38px;border-radius:3px;" title="980 (38.3%)"></span></td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td> США</td>
+            <td>↔ Иран</td>
+            <td class="num"><b>971</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:37px;border-radius:3px;" title="971 (37.9%)"></span></td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td> Россия</td>
+            <td>↔ Meta</td>
+            <td class="num"><b>949</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:37px;border-radius:3px;" title="949 (37.0%)"></span></td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>🌉 Россия</td>
+            <td>↔ Минобороны РФ</td>
+            <td class="num"><b>905</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:35px;border-radius:3px;" title="905 (35.3%)"></span></td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td> США</td>
+            <td>↔ Дональд Трамп</td>
+            <td class="num"><b>871</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:33px;border-radius:3px;" title="871 (34.0%)"></span></td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td> Госдума</td>
+            <td>↔ Россия</td>
+            <td class="num"><b>826</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:32px;border-radius:3px;" title="826 (32.2%)"></span></td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>🌉 Россия</td>
+            <td>↔ Владимир Зеленский</td>
+            <td class="num"><b>820</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:32px;border-radius:3px;" title="820 (32.0%)"></span></td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>🌉 Россия</td>
+            <td>↔ Европа</td>
+            <td class="num"><b>743</b></td>
+            <td><span style="display:inline-block;background:#FF6B6B;height:14px;width:29px;border-radius:3px;" title="743 (29.0%)"></span></td>
+        </tr>
+    </table>
+</div>
+
+<!-- ЦЕНТРАЛЬНОСТИ -->
+<h2>2. Центральности (топ-15)</h2>
+<div class="card">
+    <table>
+        <tr><th>Узел</th><th class="num">Degree</th><th class="num">Betweenness</th><th class="num">Eigenvector</th><th class="num">PageRank</th></tr>
+        <tr><td>Владимир Путин</td><td class="num">0.6281</td><td class="num">0.0717</td><td class="num">0.1980</td><td class="num">0.0198</td></tr><tr><td>Госдума</td><td class="num">0.4523</td><td class="num">0.0716</td><td class="num">0.0958</td><td class="num">0.0091</td></tr><tr><td>СК</td><td class="num">0.3216</td><td class="num">0.0638</td><td class="num">0.0437</td><td class="num">0.0053</td></tr><tr><td>МИД</td><td class="num">0.5829</td><td class="num">0.0533</td><td class="num">0.1462</td><td class="num">0.0161</td></tr><tr><td>Европа</td><td class="num">0.4573</td><td class="num">0.0358</td><td class="num">0.1241</td><td class="num">0.0132</td></tr><tr><td>США</td><td class="num">0.6784</td><td class="num">0.0343</td><td class="num">0.2449</td><td class="num">0.0383</td></tr><tr><td>Москва</td><td class="num">0.7337</td><td class="num">0.0321</td><td class="num">0.2196</td><td class="num">0.0278</td></tr><tr><td>Украина</td><td class="num">0.7236</td><td class="num">0.0302</td><td class="num">0.3853</td><td class="num">0.0431</td></tr><tr><td>Великобритания</td><td class="num">0.4322</td><td class="num">0.0296</td><td class="num">0.0652</td><td class="num">0.0099</td></tr><tr><td>Дмитрий Песков</td><td class="num">0.2915</td><td class="num">0.0296</td><td class="num">0.0733</td><td class="num">0.0067</td></tr><tr><td>Краснодарский край</td><td class="num">0.3467</td><td class="num">0.0275</td><td class="num">0.0562</td><td class="num">0.0099</td></tr><tr><td>X</td><td class="num">0.2513</td><td class="num">0.0259</td><td class="num">0.0275</td><td class="num">0.0036</td></tr><tr><td>Кремль</td><td class="num">0.3266</td><td class="num">0.0223</td><td class="num">0.0778</td><td class="num">0.0072</td></tr><tr><td>Евросоюз</td><td class="num">0.3719</td><td class="num">0.0217</td><td class="num">0.1028</td><td class="num">0.0108</td></tr><tr><td>Турция</td><td class="num">0.2864</td><td class="num">0.0212</td><td class="num">0.0366</td><td class="num">0.0046</td></tr>
+    </table>
+</div>
+
+<!-- ТИПОЛОГИЯ -->
+<div class="grid-2">
+    <div class="card">
+        <h3>🟡 Хабы</h3>
+        <p class="gray">Россия, Москва, США, Киев, Украина, Владимир Путин, МИД, ВСУ, Вооруженные силы</p>
+    </div>
+    <div class="card">
+        <h3>🔵 Мосты</h3>
+        <p class="gray">Госдума, Москва, США, Украина, Владимир Путин, МИД, Европа, СК</p>
+    </div>
+    <div class="card">
+        <h3>🟢 Влиятельные</h3>
+        <p class="gray">Россия, Москва, США, Киев, Украина, Владимир Путин, ВСУ, Владимир Зеленский, Вооруженные силы</p>
+    </div>
+    <div class="card">
+        <h3>🟣 Быстрый доступ</h3>
+        <p class="gray">Япония, Финляндия, Киев, Пентагон, Нидерландов, Персидский залив, МЧС, Фридрих Мерц, ФСБ, Южная Корея</p>
+    </div>
+</div>
+
+<!-- СКРЫТЫЕ МОСТЫ -->
+<h2>3. Скрытые мосты</h2>
+<div class="card">
+    <table>
+        <tr><th>Узел</th><th class="num">Degree</th><th class="num">Betweenness</th><th class="num">Ratio</th></tr>
+        <tr><td>Сочи</td><td class="num">0.090</td><td class="num">0.0121</td><td class="num" style="color:#FF6B6B;">0.1</td></tr><tr><td>Армения</td><td class="num">0.101</td><td class="num">0.0110</td><td class="num" style="color:#FF6B6B;">0.1</td></tr><tr><td>Александр Сырский</td><td class="num">0.131</td><td class="num">0.0142</td><td class="num" style="color:#FF6B6B;">0.1</td></tr><tr><td>X</td><td class="num">0.251</td><td class="num">0.0259</td><td class="num" style="color:#FF6B6B;">0.1</td></tr><tr><td>Япония</td><td class="num">0.136</td><td class="num">0.0138</td><td class="num" style="color:#FF6B6B;">0.1</td></tr><tr><td>Дмитрий Песков</td><td class="num">0.291</td><td class="num">0.0296</td><td class="num" style="color:#FF6B6B;">0.1</td></tr><tr><td>Бельгия</td><td class="num">0.191</td><td class="num">0.0177</td><td class="num" style="color:#FF6B6B;">0.1</td></tr><tr><td>Южная Корея</td><td class="num">0.095</td><td class="num">0.0087</td><td class="num" style="color:#FF6B6B;">0.1</td></tr><tr><td>Биньямин Нетаньяху</td><td class="num">0.060</td><td class="num">0.0055</td><td class="num" style="color:#FF6B6B;">0.1</td></tr><tr><td>МЧС</td><td class="num">0.156</td><td class="num">0.0137</td><td class="num" style="color:#FF6B6B;">0.1</td></tr>
+    </table>
+</div>
+
+<!-- СООБЩЕСТВА -->
+<h2>4. Сообщества (Louvain) — 4 групп</h2>
+
+        <div class="card" style="border-left:4px solid #FF6B6B;">
+            <h3 style="color:#FF6B6B;">Группа 1: «Украина / Владимир Зеленский / Киев»</h3>
+            <p class="gray">36 узлов · Σ частота: 19,385 · внутр. рёбер: 307</p>
+            <table style="font-size:12px;">
+                <tr><th>Узел</th><th class="num">Связей</th><th class="num">Частота</th><th class="num">Betw</th><th class="num">Part</th></tr><tr><td>Украина <span class="badge badge-yellow">дипломат</span> <span class="badge badge-green">мост</span> <span class="badge badge-red">хаб</span></td><td class="num">144</td><td class="num">3,657</td><td class="num">0.0302</td><td class="num">0.717</td></tr><tr><td>Владимир Зеленский <span class="badge badge-yellow">дипломат</span></td><td class="num">88</td><td class="num">1,854</td><td class="num">0.0178</td><td class="num">0.655</td></tr><tr><td>Киев <span class="badge badge-yellow">дипломат</span> <span class="badge badge-red">хаб</span></td><td class="num">108</td><td class="num">1,691</td><td class="num">0.0158</td><td class="num">0.686</td></tr><tr><td>Европа <span class="badge badge-yellow">дипломат</span> <span class="badge badge-green">мост</span></td><td class="num">91</td><td class="num">1,273</td><td class="num">0.0358</td><td class="num">0.641</td></tr><tr><td>Евросоюз </td><td class="num">74</td><td class="num">1,245</td><td class="num">0.0217</td><td class="num">0.590</td></tr><tr><td>МИД <span class="badge badge-yellow">дипломат</span> <span class="badge badge-green">мост</span> <span class="badge badge-red">хаб</span></td><td class="num">116</td><td class="num">1,145</td><td class="num">0.0533</td><td class="num">0.703</td></tr><tr><td>НАТО <span class="badge badge-yellow">дипломат</span></td><td class="num">77</td><td class="num">940</td><td class="num">0.0118</td><td class="num">0.665</td></tr><tr><td>Германия <span class="badge badge-yellow">дипломат</span></td><td class="num">82</td><td class="num">890</td><td class="num">0.0201</td><td class="num">0.666</td></tr><tr><td>Запад <span class="badge badge-yellow">дипломат</span></td><td class="num">54</td><td class="num">472</td><td class="num">0.0065</td><td class="num">0.686</td></tr><tr><td>Польша </td><td class="num">50</td><td class="num">466</td><td class="num">0.0140</td><td class="num">0.529</td></tr><tr><td>Сергей Лавров <span class="badge badge-yellow">дипломат</span></td><td class="num">35</td><td class="num">444</td><td class="num">0.0009</td><td class="num">0.651</td></tr><tr><td>Турция <span class="badge badge-yellow">дипломат</span></td><td class="num">57</td><td class="num">403</td><td class="num">0.0212</td><td class="num">0.686</td></tr><tr><td>Мария Захарова <span class="badge badge-yellow">дипломат</span></td><td class="num">36</td><td class="num">387</td><td class="num">0.0042</td><td class="num">0.614</td></tr><tr><td>Александр Сырский <span class="badge badge-yellow">дипломат</span></td><td class="num">26</td><td class="num">374</td><td class="num">0.0142</td><td class="num">0.637</td></tr><tr><td>Михаил Федоров </td><td class="num">25</td><td class="num">341</td><td class="num">0.0021</td><td class="num">0.530</td></tr><tr><td>Анкара <span class="badge badge-yellow">дипломат</span></td><td class="num">39</td><td class="num">302</td><td class="num">0.0055</td><td class="num">0.640</td></tr><tr><td>Кароль Навроцкий </td><td class="num">18</td><td class="num">297</td><td class="num">0.0008</td><td class="num">0.423</td></tr><tr><td>Верховная рада </td><td class="num">31</td><td class="num">288</td><td class="num">0.0080</td><td class="num">0.511</td></tr><tr><td>Италия <span class="badge badge-yellow">дипломат</span></td><td class="num">36</td><td class="num">274</td><td class="num">0.0122</td><td class="num">0.657</td></tr><tr><td>Париж <span class="badge badge-yellow">дипломат</span></td><td class="num">28</td><td class="num">261</td><td class="num">0.0040</td><td class="num">0.720</td></tr></table></div>
+        <div class="card" style="border-left:4px solid #4ECDC4;">
+            <h3 style="color:#4ECDC4;">Группа 2: «Россия / Москва / Владимир Путин»</h3>
+            <p class="gray">58 узлов · Σ частота: 32,867 · внутр. рёбер: 312</p>
+            <table style="font-size:12px;">
+                <tr><th>Узел</th><th class="num">Связей</th><th class="num">Частота</th><th class="num">Betw</th><th class="num">Part</th></tr><tr><td>Россия <span class="badge badge-yellow">дипломат</span> <span class="badge badge-red">хаб</span></td><td class="num">199</td><td class="num">12,838</td><td class="num">0.0017</td><td class="num">0.745</td></tr><tr><td>Москва <span class="badge badge-yellow">дипломат</span> <span class="badge badge-green">мост</span> <span class="badge badge-red">хаб</span></td><td class="num">146</td><td class="num">2,777</td><td class="num">0.0321</td><td class="num">0.717</td></tr><tr><td>Владимир Путин <span class="badge badge-yellow">дипломат</span> <span class="badge badge-green">мост</span> <span class="badge badge-red">хаб</span></td><td class="num">125</td><td class="num">2,173</td><td class="num">0.0717</td><td class="num">0.737</td></tr><tr><td>Meta </td><td class="num">30</td><td class="num">1,872</td><td class="num">0.0069</td><td class="num">0.512</td></tr><tr><td>Госдума <span class="badge badge-yellow">дипломат</span> <span class="badge badge-green">мост</span></td><td class="num">90</td><td class="num">1,121</td><td class="num">0.0716</td><td class="num">0.686</td></tr><tr><td>Санкт-Петербург </td><td class="num">55</td><td class="num">803</td><td class="num">0.0055</td><td class="num">0.534</td></tr><tr><td>СК <span class="badge badge-yellow">дипломат</span> <span class="badge badge-green">мост</span></td><td class="num">64</td><td class="num">709</td><td class="num">0.0638</td><td class="num">0.656</td></tr><tr><td>Дмитрий Песков <span class="badge badge-yellow">дипломат</span></td><td class="num">58</td><td class="num">692</td><td class="num">0.0296</td><td class="num">0.678</td></tr><tr><td>Кремль <span class="badge badge-yellow">дипломат</span></td><td class="num">65</td><td class="num">613</td><td class="num">0.0223</td><td class="num">0.665</td></tr><tr><td>КНР <span class="badge badge-yellow">дипломат</span></td><td class="num">50</td><td class="num">600</td><td class="num">0.0186</td><td class="num">0.651</td></tr><tr><td>МВД </td><td class="num">33</td><td class="num">556</td><td class="num">0.0101</td><td class="num">0.519</td></tr><tr><td>Беларусь <span class="badge badge-yellow">дипломат</span></td><td class="num">51</td><td class="num">455</td><td class="num">0.0186</td><td class="num">0.640</td></tr><tr><td>ЦБ </td><td class="num">10</td><td class="num">377</td><td class="num">0.0013</td><td class="num">0.203</td></tr><tr><td>МЧС </td><td class="num">31</td><td class="num">353</td><td class="num">0.0137</td><td class="num">0.512</td></tr><tr><td>ФСБ <span class="badge badge-yellow">дипломат</span></td><td class="num">30</td><td class="num">298</td><td class="num">0.0062</td><td class="num">0.655</td></tr><tr><td>ООН <span class="badge badge-yellow">дипломат</span></td><td class="num">40</td><td class="num">260</td><td class="num">0.0090</td><td class="num">0.707</td></tr><tr><td>Александр Лукашенко </td><td class="num">19</td><td class="num">238</td><td class="num">0.0009</td><td class="num">0.552</td></tr><tr><td>Совет безопасности <span class="badge badge-yellow">дипломат</span></td><td class="num">34</td><td class="num">230</td><td class="num">0.0109</td><td class="num">0.615</td></tr><tr><td>Apple </td><td class="num">9</td><td class="num">224</td><td class="num">0.0003</td><td class="num">0.395</td></tr><tr><td>ГУ </td><td class="num">18</td><td class="num">210</td><td class="num">0.0018</td><td class="num">0.558</td></tr></table></div>
+        <div class="card" style="border-left:4px solid #45B7D1;">
+            <h3 style="color:#45B7D1;">Группа 3: «США / Дональд Трамп / Иран»</h3>
+            <p class="gray">57 узлов · Σ частота: 21,825 · внутр. рёбер: 592</p>
+            <table style="font-size:12px;">
+                <tr><th>Узел</th><th class="num">Связей</th><th class="num">Частота</th><th class="num">Betw</th><th class="num">Part</th></tr><tr><td>США <span class="badge badge-yellow">дипломат</span> <span class="badge badge-green">мост</span> <span class="badge badge-red">хаб</span></td><td class="num">135</td><td class="num">3,752</td><td class="num">0.0343</td><td class="num">0.604</td></tr><tr><td>Дональд Трамп <span class="badge badge-yellow">дипломат</span></td><td class="num">73</td><td class="num">1,515</td><td class="num">0.0067</td><td class="num">0.629</td></tr><tr><td>Иран </td><td class="num">75</td><td class="num">1,294</td><td class="num">0.0071</td><td class="num">0.444</td></tr><tr><td>Франция </td><td class="num">94</td><td class="num">1,170</td><td class="num">0.0170</td><td class="num">0.541</td></tr><tr><td>Великобритания </td><td class="num">86</td><td class="num">1,030</td><td class="num">0.0296</td><td class="num">0.597</td></tr><tr><td>Вашингтон </td><td class="num">60</td><td class="num">748</td><td class="num">0.0034</td><td class="num">0.591</td></tr><tr><td>Аргентина </td><td class="num">50</td><td class="num">733</td><td class="num">0.0030</td><td class="num">0.201</td></tr><tr><td>Канада </td><td class="num">59</td><td class="num">698</td><td class="num">0.0015</td><td class="num">0.277</td></tr><tr><td>Мексика </td><td class="num">48</td><td class="num">606</td><td class="num">0.0030</td><td class="num">0.213</td></tr><tr><td>ФИФА </td><td class="num">42</td><td class="num">602</td><td class="num">0.0065</td><td class="num">0.262</td></tr><tr><td>Испания </td><td class="num">48</td><td class="num">511</td><td class="num">0.0068</td><td class="num">0.325</td></tr><tr><td>Лионель Месси </td><td class="num">31</td><td class="num">460</td><td class="num">0.0045</td><td class="num">0.097</td></tr><tr><td>Ормузский пролив </td><td class="num">34</td><td class="num">438</td><td class="num">0.0010</td><td class="num">0.370</td></tr><tr><td>Израиль </td><td class="num">51</td><td class="num">424</td><td class="num">0.0087</td><td class="num">0.368</td></tr><tr><td>X <span class="badge badge-yellow">дипломат</span></td><td class="num">50</td><td class="num">423</td><td class="num">0.0259</td><td class="num">0.648</td></tr><tr><td>Тегеран </td><td class="num">34</td><td class="num">388</td><td class="num">0.0009</td><td class="num">0.363</td></tr><tr><td>Ближний Восток </td><td class="num">38</td><td class="num">345</td><td class="num">0.0074</td><td class="num">0.453</td></tr><tr><td>Белый дом </td><td class="num">45</td><td class="num">343</td><td class="num">0.0074</td><td class="num">0.576</td></tr><tr><td>Криштиану Роналду </td><td class="num">25</td><td class="num">329</td><td class="num">0.0023</td><td class="num">0.146</td></tr><tr><td>КСИР </td><td class="num">22</td><td class="num">261</td><td class="num">0.0019</td><td class="num">0.321</td></tr></table></div>
+        <div class="card" style="border-left:4px solid #96CEB4;">
+            <h3 style="color:#96CEB4;">Группа 4: «ВСУ / Вооруженные силы / Минобороны РФ»</h3>
+            <p class="gray">49 узлов · Σ частота: 19,620 · внутр. рёбер: 495</p>
+            <table style="font-size:12px;">
+                <tr><th>Узел</th><th class="num">Связей</th><th class="num">Частота</th><th class="num">Betw</th><th class="num">Part</th></tr><tr><td>ВСУ <span class="badge badge-yellow">дипломат</span> <span class="badge badge-red">хаб</span></td><td class="num">109</td><td class="num">2,969</td><td class="num">0.0062</td><td class="num">0.655</td></tr><tr><td>Вооруженные силы <span class="badge badge-yellow">дипломат</span> <span class="badge badge-red">хаб</span></td><td class="num">114</td><td class="num">2,122</td><td class="num">0.0138</td><td class="num">0.684</td></tr><tr><td>Минобороны РФ </td><td class="num">87</td><td class="num">1,044</td><td class="num">0.0152</td><td class="num">0.596</td></tr><tr><td>Подмосковье </td><td class="num">61</td><td class="num">943</td><td class="num">0.0091</td><td class="num">0.525</td></tr><tr><td>Ростовская область </td><td class="num">54</td><td class="num">846</td><td class="num">0.0071</td><td class="num">0.410</td></tr><tr><td>Краснодарский край </td><td class="num">69</td><td class="num">790</td><td class="num">0.0275</td><td class="num">0.500</td></tr><tr><td>Курская область </td><td class="num">53</td><td class="num">733</td><td class="num">0.0030</td><td class="num">0.394</td></tr><tr><td>Белгородская область </td><td class="num">52</td><td class="num">660</td><td class="num">0.0168</td><td class="num">0.357</td></tr><tr><td>Крым </td><td class="num">50</td><td class="num">657</td><td class="num">0.0082</td><td class="num">0.419</td></tr><tr><td>ПВО </td><td class="num">61</td><td class="num">576</td><td class="num">0.0138</td><td class="num">0.511</td></tr><tr><td>ДНР </td><td class="num">41</td><td class="num">515</td><td class="num">0.0028</td><td class="num">0.548</td></tr><tr><td>Запорожская область </td><td class="num">49</td><td class="num">500</td><td class="num">0.0084</td><td class="num">0.520</td></tr><tr><td>Ленинградская область </td><td class="num">50</td><td class="num">496</td><td class="num">0.0167</td><td class="num">0.582</td></tr><tr><td>Сергей Собянин </td><td class="num">41</td><td class="num">396</td><td class="num">0.0042</td><td class="num">0.488</td></tr><tr><td>Брянская область </td><td class="num">44</td><td class="num">337</td><td class="num">0.0048</td><td class="num">0.355</td></tr><tr><td>Харьковская область <span class="badge badge-yellow">дипломат</span></td><td class="num">35</td><td class="num">327</td><td class="num">0.0057</td><td class="num">0.643</td></tr><tr><td>Одесса <span class="badge badge-yellow">дипломат</span></td><td class="num">24</td><td class="num">291</td><td class="num">0.0034</td><td class="num">0.613</td></tr><tr><td>Черное море </td><td class="num">51</td><td class="num">278</td><td class="num">0.0137</td><td class="num">0.445</td></tr><tr><td>Олимпийский комитет <span class="badge badge-yellow">дипломат</span></td><td class="num">14</td><td class="num">274</td><td class="num">0.0011</td><td class="num">0.697</td></tr><tr><td>Росавиация </td><td class="num">34</td><td class="num">247</td><td class="num">0.0068</td><td class="num">0.500</td></tr></table></div>
+
+<!-- МЕЖГРУППОВЫЕ СВЯЗИ -->
+<h2>5. Межгрупповые связи</h2>
+<div class="card">
+    <table>
+        <tr><th>Группа</th><th>Связь</th><th class="num">Вес</th><th class="num">Норм.</th></tr>
+        <tr><td>Группа 2 «Россия / Москва»</td><td>↔ Группа 4 «Вооруженные силы / ВСУ»</td><td class="num"><b>24420</b></td><td class="num">8.6</td></tr><tr><td>Группа 1 «Украина / МИД»</td><td>↔ Группа 2 «Россия / Москва»</td><td class="num"><b>24397</b></td><td class="num">11.7</td></tr><tr><td>Группа 1 «Украина / МИД»</td><td>↔ Группа 3 «США / Франция»</td><td class="num"><b>16416</b></td><td class="num">8.0</td></tr><tr><td>Группа 2 «Россия / Москва»</td><td>↔ Группа 3 «США / Франция»</td><td class="num"><b>15605</b></td><td class="num">4.7</td></tr><tr><td>Группа 1 «Украина / МИД»</td><td>↔ Группа 4 «Вооруженные силы / ВСУ»</td><td class="num"><b>14495</b></td><td class="num">8.2</td></tr><tr><td>Группа 3 «США / Франция»</td><td>↔ Группа 4 «Вооруженные силы / ВСУ»</td><td class="num"><b>2705</b></td><td class="num">1.0</td></tr>
+    </table>
+</div>
+
+<!-- СТАТИСТИКА -->
+<h2>6. Статистика распределений</h2>
+<div class="card">
+    <table class="stat-table">
+        <tr><th>Метрика</th><th class="num">Мин</th><th class="num">Макс</th><th class="num">Сред</th><th class="num">Медиана</th><th class="num">Std</th></tr>
+        <tr><td>Веса рёбер</td><td class="num">10.0</td><td class="num">2562.0</td><td class="num">65.0</td><td class="num">29.0</td><td class="num">122.9</td></tr>
+        <tr><td>Степени узлов</td><td class="num">2.0</td><td class="num">199.0</td><td class="num">33.8</td><td class="num">24.0</td><td class="num">29.6</td></tr>
+        <tr><td>Betweenness</td><td class="num">0.0</td><td class="num">0.1</td><td class="num">0.0</td><td class="num">0.0</td><td class="num">0.0</td></tr>
+        <tr><td>Частоты</td><td class="num">104.0</td><td class="num">12838.0</td><td class="num">468.5</td><td class="num">191.5</td><td class="num">1039.6</td></tr>
+    </table>
+    <p style="margin-top:10px;"><b>Коэффициент Джини (степени):</b> 0.416</p>
+</div>
+
+<!-- K-CORE -->
+<h2>7. K-Core и клики</h2>
+<div class="grid-2">
+    <div class="card">
+        <h3>Ядро графа</h3>
+        <p><b>Максимальное k-core:</b> 26</p>
+        <p><b>Узлов в ядре:</b> 47</p>
+        <p><b>Крупнейшая клика:</b> 26 узлов</p>
+        <p style="font-size:12px;color:#8b949e;">Азовское море, Белгородская область, Брянская область, ВСУ, Владимир Путин, Волгоградская область, Вооруженные силы, Воронеж, Калужская область, Краснодарский край, Крым, Курская область, Ленинградская область, Липецкая область, Минобороны РФ...</p>
+    </div>
+    <div class="card">
+        <h3>Распределение k-core</h3>
+        <table>
+            <tr><th>k</th><th class="num">Узлов</th><th>Состав</th></tr>
+            <tr><td>k=26</td><td class='num'>47</td><td style='font-size:12px;'>Госдума, КНР, Россия, Ростовская область, Москва, США, Дмитрий Песков, Киев...</td></tr><tr><td>k=25</td><td class='num'>12</td><td style='font-size:12px;'>Совет безопасности, Рязанская область, Тульская область, Калужская область, Волгоградская область, Воронеж, Азовское море, Липецкая область...</td></tr><tr><td>k=24</td><td class='num'>7</td><td style='font-size:12px;'>Харьковская область, Донбасс, Канада, Италия, ФСБ, Тамбовская область, Марк Рютте</td></tr><tr><td>k=23</td><td class='num'>23</td><td style='font-size:12px;'>Япония, Ближний Восток, ФИФА, Meta, Мексика, Израиль, Аргентина, Испания...</td></tr><tr><td>k=22</td><td class='num'>6</td><td style='font-size:12px;'>МВД, Лионель Месси, Верховная рада, Марокко, Египет, Марко Рубио</td></tr><tr><td>k=21</td><td class='num'>7</td><td style='font-size:12px;'>МЧС, Катар, Совфед, Дмитрий Медведев, СВО, Фридрих Мерц, Криштиану Роналду</td></tr><tr><td>k=20</td><td class='num'>7</td><td style='font-size:12px;'>Литва, Александр Сырский, Михаил Федоров, Татарстан, Эстония, МОК, Колумбия</td></tr><tr><td>k=19</td><td class='num'>12</td><td style='font-size:12px;'>ОАЭ, Севастополь, Генштаб, Константиновка, КСИР, Саудовская Аравия, Персидский залив, Брюссель...</td></tr><tr><td>k=18</td><td class='num'>8</td><td style='font-size:12px;'>Джанни Инфантино, Лондон, Пентагон, Армения, Херсонская область, Домодедово, Александр Лукашенко, Узбекистан</td></tr><tr><td>k=17</td><td class='num'>10</td><td style='font-size:12px;'>Сумская область, Минск, Бахрейн, Варшава, Казахстан, Кароль Навроцкий, Кир Стармер, Килиан Мбаппе...</td></tr><tr><td>k=16</td><td class='num'>14</td><td style='font-size:12px;'>Зенит, ГУ, Николаевская область, Сочи, Славянск, Краматорск, Спартак, Внуково...</td></tr><tr><td>k=15</td><td class='num'>4</td><td style='font-size:12px;'>УЕФА, СССР, Нью-Йорк, Румыния</td></tr><tr><td>k=14</td><td class='num'>5</td><td style='font-size:12px;'>Свердловская область, УПА, Яна Лантратова, Олимпийский комитет, ДР Конго</td></tr><tr><td>k=13</td><td class='num'>1</td><td style='font-size:12px;'>Wildberries</td></tr><tr><td>k=12</td><td class='num'>3</td><td style='font-size:12px;'>Биньямин Нетаньяху, Калининград, СБУ</td></tr><tr><td>k=11</td><td class='num'>5</td><td style='font-size:12px;'>Линдси Грэм, Челябинск, Иркутская область, Красноярский край, Индия</td></tr><tr><td>k=10</td><td class='num'>9</td><td style='font-size:12px;'>Нижний Новгород, Новосибирск, Венесуэла, Дагестан, Таиланд, ЦБ, Казань, Екатеринбург...</td></tr><tr><td>k=9</td><td class='num'>2</td><td style='font-size:12px;'>Уфа, МКАД</td></tr><tr><td>k=8</td><td class='num'>2</td><td style='font-size:12px;'>Пекин, Вадим Ермолаев</td></tr><tr><td>k=7</td><td class='num'>3</td><td style='font-size:12px;'>Александр Овечкин, Александр Хинштейн, АЭС РФ</td></tr><tr><td>k=6</td><td class='num'>5</td><td style='font-size:12px;'>Никола Пашинян, Google, VK, ФАС, Apple</td></tr><tr><td>k=5</td><td class='num'>2</td><td style='font-size:12px;'>Ксения Собчак, 112</td></tr><tr><td>k=4</td><td class='num'>2</td><td style='font-size:12px;'>Международный союз конькобежцев, Владивосток</td></tr><tr><td>k=3</td><td class='num'>2</td><td style='font-size:12px;'>Земля, РАН</td></tr><tr><td>k=2</td><td class='num'>2</td><td style='font-size:12px;'>Роспотребнадзор, Миронов</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- СРАВНЕНИЕ С МОДЕЛЯМИ -->
+<h2>8. Сравнение с моделями</h2>
+<div class="card">
+    <table>
+        <tr><th>Модель</th><th class="num">Кластеризация</th><th class="num">Ср. путь</th></tr>
+        <tr><td>Эрдёш-Реньи (p=0.170)</td><td class="num">0.1739</td><td class="num">1.83</td></tr>
+        <tr><td>Реальный граф</td><td class="num" style="color:#4ECDC4;">0.0158</td><td class="num" style="color:#4ECDC4;">0.02</td></tr>
+        <tr><td>Конфигурационная модель</td><td class="num">0.3068</td><td class="num">—</td></tr>
+    </table>
+    <p style="margin-top:10px;"><b>Small-world коэффициент σ:</b> 8.88</p>
+</div>
+
+<p style="text-align:center;color:#30363d;font-size:12px;margin-top:50px;">
+    Аналитика графа · Газета.Ru · Топ-200 сущностей · порог 10
+</p>
+</div>
+</body>
+</html>

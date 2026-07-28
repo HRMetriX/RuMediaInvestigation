@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Динамика по периодам</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#0d1117; color:#c9d1d9; font-family:'Segoe UI',Arial,sans-serif; line-height:1.6; }
+    .container { max-width:1200px; margin:0 auto; padding:30px 20px; }
+    h1 { color:#FF6B6B; font-size:28px; }
+    h2 { color:#4ECDC4; font-size:22px; margin:40px 0 15px; border-bottom:1px solid #30363d; padding-bottom:8px; }
+    h3 { color:#FFEAA7; font-size:17px; margin:25px 0 10px; }
+    table { width:100%; border-collapse:collapse; margin:15px 0; font-size:13px; }
+    th { background:#161b22; color:#FFEAA7; padding:10px 12px; text-align:left; border-bottom:2px solid #30363d; }
+    td { padding:8px 12px; border-bottom:1px solid #21262d; }
+    tr:hover { background:#161b22; }
+    .num { text-align:right; font-family:monospace; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:10px; padding:20px; margin:20px 0; transition:0.2s; }
+    a.card:hover { border-color:#4ECDC4; }
+    .card h3 { margin-top:0; }
+    .card-icon { font-size:32px; margin-bottom:8px; }
+    .gray { color:#8b949e; }
+    .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin:20px 0; }
+    @media (max-width:900px) { .grid-3,.grid-2 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>⏳ Динамика по периодам</h1>
+<p class="gray">6 недель · топ-50 сущностей · порог связи ≥ 2</p>
+
+<h2>🕸️ Графы по периодам</h2>
+<div class='grid-3'>
+        <a class='card' href='time_graphs/period_Неделя_1_17-22_июня.html' target='_blank' style='text-decoration:none;color:#c9d1d9;'>
+            <div class='card-icon'>🕸️</div>
+            <h3>Неделя 1 (17–22 июня)</h3>
+            <p class='gray'>50 узлов, 695 рёбер</p>
+            <span style='color:#4ECDC4;'>→ Открыть граф</span>
+        </a>
+        <a class='card' href='time_graphs/period_Неделя_2_23-29_июня.html' target='_blank' style='text-decoration:none;color:#c9d1d9;'>
+            <div class='card-icon'>🕸️</div>
+            <h3>Неделя 2 (23–29 июня)</h3>
+            <p class='gray'>50 узлов, 775 рёбер</p>
+            <span style='color:#4ECDC4;'>→ Открыть граф</span>
+        </a>
+        <a class='card' href='time_graphs/period_Неделя_3_30_июня_-_6_июля.html' target='_blank' style='text-decoration:none;color:#c9d1d9;'>
+            <div class='card-icon'>🕸️</div>
+            <h3>Неделя 3 (30 июня – 6 июля)</h3>
+            <p class='gray'>50 узлов, 862 рёбер</p>
+            <span style='color:#4ECDC4;'>→ Открыть граф</span>
+        </a>
+        <a class='card' href='time_graphs/period_Неделя_4_7-13_июля.html' target='_blank' style='text-decoration:none;color:#c9d1d9;'>
+            <div class='card-icon'>🕸️</div>
+            <h3>Неделя 4 (7–13 июля)</h3>
+            <p class='gray'>50 узлов, 816 рёбер</p>
+            <span style='color:#4ECDC4;'>→ Открыть граф</span>
+        </a>
+        <a class='card' href='time_graphs/period_Неделя_5_14-20_июля.html' target='_blank' style='text-decoration:none;color:#c9d1d9;'>
+            <div class='card-icon'>🕸️</div>
+            <h3>Неделя 5 (14–20 июля)</h3>
+            <p class='gray'>50 узлов, 775 рёбер</p>
+            <span style='color:#4ECDC4;'>→ Открыть граф</span>
+        </a>
+        <a class='card' href='time_graphs/period_Неделя_6_21-24_июля.html' target='_blank' style='text-decoration:none;color:#c9d1d9;'>
+            <div class='card-icon'>🕸️</div>
+            <h3>Неделя 6 (21–24 июля)</h3>
+            <p class='gray'>50 узлов, 653 рёбер</p>
+            <span style='color:#4ECDC4;'>→ Открыть граф</span>
+        </a></div>
+
+<h2>1. Базовые характеристики</h2>
+<div class="card"><table><tr><th>Период</th><th class='num'>Статей</th><th class='num'>Узлов</th><th class='num'>Рёбер</th><th class='num'>Плотность</th><th class='num'>Модулярность</th><th class='num'>Сообществ</th></tr><tr><td><b>Неделя 1 (17–22 июня)</b></td><td class='num'>2,620</td><td class='num'>50</td><td class='num'>695</td><td class='num'>0.5673</td><td class='num'>0.2862</td><td class='num'>2</td></tr><tr><td><b>Неделя 2 (23–29 июня)</b></td><td class='num'>3,766</td><td class='num'>50</td><td class='num'>775</td><td class='num'>0.6327</td><td class='num'>0.2275</td><td class='num'>4</td></tr><tr><td><b>Неделя 3 (30 июня – 6 июля)</b></td><td class='num'>3,938</td><td class='num'>50</td><td class='num'>862</td><td class='num'>0.7037</td><td class='num'>0.1800</td><td class='num'>4</td></tr><tr><td><b>Неделя 4 (7–13 июля)</b></td><td class='num'>3,930</td><td class='num'>50</td><td class='num'>816</td><td class='num'>0.6661</td><td class='num'>0.2003</td><td class='num'>4</td></tr><tr><td><b>Неделя 5 (14–20 июля)</b></td><td class='num'>3,774</td><td class='num'>50</td><td class='num'>775</td><td class='num'>0.6327</td><td class='num'>0.2729</td><td class='num'>4</td></tr><tr><td><b>Неделя 6 (21–24 июля)</b></td><td class='num'>1,992</td><td class='num'>50</td><td class='num'>653</td><td class='num'>0.5331</td><td class='num'>0.2271</td><td class='num'>4</td></tr></table></div>
+
+<h2>2. Динамика центральностей</h2>
+<div class="card"><table><tr><th>Сущность</th><th class='num'>Н1</th><th class='num'>Н2</th><th class='num'>Н3</th><th class='num'>Н4</th><th class='num'>Н5</th><th class='num'>Н6</th><th>Тренд</th></tr><tr><td>X</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num'>0.0615</td><td class='num'>0.0000</td><td class='num'>0.0103</td><td class='num'>0.1455</td><td class='num' style='color:#3fb950;'>↗</td></tr><tr><td>КНР</td><td class='num'>0.0696</td><td class='num'>0.0599</td><td class='num'>0.0307</td><td class='num'>0.0514</td><td class='num'>0.0771</td><td class='num'>0.1133</td><td class='num' style='color:#3fb950;'>↗</td></tr><tr><td>Meta</td><td class='num'>0.0212</td><td class='num'>0.0460</td><td class='num'>0.0991</td><td class='num'>0.1118</td><td class='num'>0.0747</td><td class='num'>0.0309</td><td class='num' style='color:#3fb950;'>↗</td></tr><tr><td>СК</td><td class='num'>0.1023</td><td class='num'>0.0681</td><td class='num'>0.0456</td><td class='num'>0.0302</td><td class='num'>0.0043</td><td class='num'>0.0040</td><td class='num' style='color:#FF6B6B;'>↘</td></tr><tr><td>Франция</td><td class='num'>0.0940</td><td class='num'>0.0337</td><td class='num'>0.0305</td><td class='num'>0.0260</td><td class='num'>0.0124</td><td class='num'>0.0199</td><td class='num' style='color:#FF6B6B;'>↘</td></tr><tr><td>Канада</td><td class='num'>0.0189</td><td class='num'>0.0851</td><td class='num'>0.0250</td><td class='num'>0.0213</td><td class='num'>0.0443</td><td class='num'>0.0000</td><td class='num' style='color:#FF6B6B;'>↘</td></tr><tr><td>МВД</td><td class='num'>0.0811</td><td class='num'>0.0356</td><td class='num'>0.0590</td><td class='num'>0.0482</td><td class='num'>0.0236</td><td class='num'>0.0232</td><td class='num' style='color:#FF6B6B;'>↘</td></tr><tr><td>Запорожская область</td><td class='num'>0.0058</td><td class='num'>0.0757</td><td class='num'>0.0246</td><td class='num'>0.0189</td><td class='num'>0.0000</td><td class='num'>0.0343</td><td class='num' style='color:#3fb950;'>↗</td></tr><tr><td>Госдума</td><td class='num'>0.0102</td><td class='num'>0.0516</td><td class='num'>0.0746</td><td class='num'>0.0147</td><td class='num'>0.0226</td><td class='num'>0.0580</td><td class='num' style='color:#3fb950;'>↗</td></tr><tr><td>ПВО</td><td class='num'>0.0150</td><td class='num'>0.0029</td><td class='num'>0.0107</td><td class='num'>0.0571</td><td class='num'>0.0742</td><td class='num'>0.0331</td><td class='num' style='color:#3fb950;'>↗</td></tr><tr><td>Владимир Зеленский</td><td class='num'>0.0054</td><td class='num'>0.0338</td><td class='num'>0.0032</td><td class='num'>0.0661</td><td class='num'>0.0165</td><td class='num'>0.0451</td><td class='num' style='color:#3fb950;'>↗</td></tr><tr><td>Кремль</td><td class='num'>0.0553</td><td class='num'>0.0174</td><td class='num'>0.0238</td><td class='num'>0.0159</td><td class='num'>0.0658</td><td class='num'>0.0609</td><td class='num' style='color:#8b949e;'>→</td></tr><tr><td>Дональд Трамп</td><td class='num'>0.0648</td><td class='num'>0.0220</td><td class='num'>0.0051</td><td class='num'>0.0021</td><td class='num'>0.0046</td><td class='num'>0.0000</td><td class='num' style='color:#FF6B6B;'>↘</td></tr><tr><td>Ливан</td><td class='num'>0.0642</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num' style='color:#FF6B6B;'>↘</td></tr><tr><td>ДНР</td><td class='num'>0.0000</td><td class='num'>0.0054</td><td class='num'>0.0252</td><td class='num'>0.0642</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num' style='color:#8b949e;'>→</td></tr><tr><td>Ростовская область</td><td class='num'>0.0030</td><td class='num'>0.0635</td><td class='num'>0.0050</td><td class='num'>0.0092</td><td class='num'>0.0614</td><td class='num'>0.0030</td><td class='num' style='color:#8b949e;'>→</td></tr><tr><td>Европа</td><td class='num'>0.0622</td><td class='num'>0.0092</td><td class='num'>0.0050</td><td class='num'>0.0171</td><td class='num'>0.0533</td><td class='num'>0.0183</td><td class='num' style='color:#FF6B6B;'>↘</td></tr><tr><td>Минобороны РФ</td><td class='num'>0.0614</td><td class='num'>0.0093</td><td class='num'>0.0135</td><td class='num'>0.0154</td><td class='num'>0.0459</td><td class='num'>0.0240</td><td class='num' style='color:#FF6B6B;'>↘</td></tr><tr><td>Испания</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num'>0.0603</td><td class='num'>0.0231</td><td class='num'>0.0146</td><td class='num' style='color:#3fb950;'>↗</td></tr><tr><td>Швейцария</td><td class='num'>0.0574</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num'>0.0000</td><td class='num' style='color:#FF6B6B;'>↘</td></tr></table></div>
+
+<div class="grid-2">
+    <div class="card"><h3>🔥 Рост значимости</h3><table><tr><th>Сущность</th><th class='num'>Начало</th><th class='num'>Конец</th><th class='num'>×</th></tr><tr><td>X</td><td class='num'>0.0000</td><td class='num'>0.1455</td><td class='num' style='color:#3fb950;'>×1455.1</td></tr><tr><td>Ленинградская область</td><td class='num'>0.0000</td><td class='num'>0.0473</td><td class='num' style='color:#3fb950;'>×473.3</td></tr><tr><td>Михаил Федоров</td><td class='num'>0.0000</td><td class='num'>0.0216</td><td class='num' style='color:#3fb950;'>×216.3</td></tr><tr><td>Италия</td><td class='num'>0.0000</td><td class='num'>0.0174</td><td class='num' style='color:#3fb950;'>×173.8</td></tr><tr><td>Испания</td><td class='num'>0.0000</td><td class='num'>0.0146</td><td class='num' style='color:#3fb950;'>×146.0</td></tr><tr><td>Дмитрий Песков</td><td class='num'>0.0000</td><td class='num'>0.0134</td><td class='num' style='color:#3fb950;'>×134.4</td></tr><tr><td>Александр Сырский</td><td class='num'>0.0000</td><td class='num'>0.0117</td><td class='num' style='color:#3fb950;'>×117.3</td></tr><tr><td>Аргентина</td><td class='num'>0.0004</td><td class='num'>0.0470</td><td class='num' style='color:#3fb950;'>×103.4</td></tr><tr><td>Марко Рубио</td><td class='num'>0.0000</td><td class='num'>0.0091</td><td class='num' style='color:#3fb950;'>×91.4</td></tr><tr><td>МЧС</td><td class='num'>0.0000</td><td class='num'>0.0068</td><td class='num' style='color:#3fb950;'>×68.2</td></tr></table></div>
+    <div class="card"><h3>🧊 Падение значимости</h3><table><tr><th>Сущность</th><th class='num'>Начало</th><th class='num'>Конец</th><th class='num'>×</th></tr><tr><td>СК</td><td class='num'>0.1023</td><td class='num'>0.0040</td><td class='num' style='color:#FF6B6B;'>×25.8</td></tr><tr><td>Франция</td><td class='num'>0.0940</td><td class='num'>0.0199</td><td class='num' style='color:#FF6B6B;'>×4.7</td></tr><tr><td>Крым</td><td class='num'>0.0468</td><td class='num'>0.0114</td><td class='num' style='color:#FF6B6B;'>×4.1</td></tr><tr><td>Санкт-Петербург</td><td class='num'>0.0498</td><td class='num'>0.0127</td><td class='num' style='color:#FF6B6B;'>×3.9</td></tr><tr><td>МВД</td><td class='num'>0.0811</td><td class='num'>0.0232</td><td class='num' style='color:#FF6B6B;'>×3.5</td></tr><tr><td>Европа</td><td class='num'>0.0622</td><td class='num'>0.0183</td><td class='num' style='color:#FF6B6B;'>×3.4</td></tr><tr><td>США</td><td class='num'>0.0123</td><td class='num'>0.0043</td><td class='num' style='color:#FF6B6B;'>×2.9</td></tr><tr><td>Украина</td><td class='num'>0.0060</td><td class='num'>0.0024</td><td class='num' style='color:#FF6B6B;'>×2.6</td></tr><tr><td>Минобороны РФ</td><td class='num'>0.0614</td><td class='num'>0.0240</td><td class='num' style='color:#FF6B6B;'>×2.6</td></tr><tr><td>Краснодарский край</td><td class='num'>0.0287</td><td class='num'>0.0136</td><td class='num' style='color:#FF6B6B;'>×2.1</td></tr></table></div>
+</div>
+
+<h2>3. Ключевые игроки по периодам</h2>
+<div class="card"><table><tr><th>Период</th><th>Хабы</th><th>Мосты</th></tr><tr><td><b>Неделя 1 (17–22 июня)</b></td><td>Россия, США, Владимир Путин</td><td>СК, Франция, МВД</td></tr><tr><td><b>Неделя 2 (23–29 июня)</b></td><td>Россия, Владимир Путин, США</td><td>Канада, Запорожская область, СК</td></tr><tr><td><b>Неделя 3 (30 июня – 6 июля)</b></td><td>Россия, Украина, Москва</td><td>Meta, Госдума, X</td></tr><tr><td><b>Неделя 4 (7–13 июля)</b></td><td>Россия, Москва, Украина</td><td>Meta, Владимир Зеленский, ДНР</td></tr><tr><td><b>Неделя 5 (14–20 июля)</b></td><td>Россия, Вооруженные силы, Украина</td><td>КНР, Meta, ПВО</td></tr><tr><td><b>Неделя 6 (21–24 июля)</b></td><td>Россия, Украина, Москва</td><td>X, КНР, Кремль</td></tr></table></div>
+
+<h2>4. Устойчивые пары</h2>
+<div class="card"><p>Найдено <b>28</b> устойчивых пар</p><p class='gray'>Meta — Госдума · Meta — Россия · Аргентина — Франция · ВСУ — Вооруженные силы · ВСУ — Минобороны РФ · Вашингтон — Дональд Трамп · Вашингтон — Иран · Вашингтон — США · Владимир Зеленский — Киев · Владимир Зеленский — Украина · Владимир Путин — Кремль · Вооруженные силы — Минобороны РФ · Госдума — Россия · Дональд Трамп — Иран · Дональд Трамп — США</p></div>
+
+<h2>5. Динамика частот</h2>
+<div class="grid-2">
+    <div class="card"><h3>🔥 Растущие</h3><table><tr><th>Сущность</th><th class='num'>Начало</th><th class='num'>Конец</th><th class='num'>Δ</th></tr><tr><td>Александр Сырский</td><td class='num'>4.6</td><td class='num'>39.7</td><td class='num' style='color:#3fb950;'>+35.1</td></tr><tr><td>Санкт-Петербург</td><td class='num'>31.3</td><td class='num'>60.2</td><td class='num' style='color:#3fb950;'>+28.9</td></tr><tr><td>Михаил Федоров</td><td class='num'>3.8</td><td class='num'>29.1</td><td class='num' style='color:#3fb950;'>+25.3</td></tr><tr><td>Марко Рубио</td><td class='num'>3.1</td><td class='num'>28.1</td><td class='num' style='color:#3fb950;'>+25.1</td></tr><tr><td>Ленинградская область</td><td class='num'>11.1</td><td class='num'>35.1</td><td class='num' style='color:#3fb950;'>+24.1</td></tr><tr><td>МВД</td><td class='num'>23.7</td><td class='num'>43.2</td><td class='num' style='color:#3fb950;'>+19.5</td></tr><tr><td>Михаил Драпатый</td><td class='num'>0.0</td><td class='num'>17.6</td><td class='num' style='color:#3fb950;'>+17.6</td></tr><tr><td>Россия</td><td class='num'>471.8</td><td class='num'>488.5</td><td class='num' style='color:#3fb950;'>+16.7</td></tr><tr><td>Манила</td><td class='num'>0.4</td><td class='num'>17.1</td><td class='num' style='color:#3fb950;'>+16.7</td></tr><tr><td>Одесса</td><td class='num'>3.8</td><td class='num'>20.1</td><td class='num' style='color:#3fb950;'>+16.3</td></tr></table></div>
+    <div class="card"><h3>🧊 Падающие</h3><table><tr><th>Сущность</th><th class='num'>Начало</th><th class='num'>Конец</th><th class='num'>Δ</th></tr><tr><td>Москва</td><td class='num'>178.2</td><td class='num'>115.5</td><td class='num' style='color:#FF6B6B;'>-62.8</td></tr><tr><td>Франция</td><td class='num'>85.5</td><td class='num'>23.6</td><td class='num' style='color:#FF6B6B;'>-61.9</td></tr><tr><td>Канада</td><td class='num'>59.5</td><td class='num'>8.0</td><td class='num' style='color:#FF6B6B;'>-51.5</td></tr><tr><td>Мексика</td><td class='num'>53.8</td><td class='num'>5.0</td><td class='num' style='color:#FF6B6B;'>-48.8</td></tr><tr><td>США</td><td class='num'>179.0</td><td class='num'>140.6</td><td class='num' style='color:#FF6B6B;'>-38.4</td></tr><tr><td>Израиль</td><td class='num'>42.7</td><td class='num'>8.5</td><td class='num' style='color:#FF6B6B;'>-34.2</td></tr><tr><td>Швейцария</td><td class='num'>30.9</td><td class='num'>1.5</td><td class='num' style='color:#FF6B6B;'>-29.4</td></tr><tr><td>Сергей Собянин</td><td class='num'>34.0</td><td class='num'>5.5</td><td class='num' style='color:#FF6B6B;'>-28.4</td></tr><tr><td>ЧМ‑2022</td><td class='num'>27.5</td><td class='num'>0.0</td><td class='num' style='color:#FF6B6B;'>-27.5</td></tr><tr><td>Аргентина</td><td class='num'>51.9</td><td class='num'>24.6</td><td class='num' style='color:#FF6B6B;'>-27.3</td></tr></table></div>
+</div>
+
+<h2>6. Сходство периодов (Jaccard)</h2>
+<div class="card"><table><tr><th>Периоды</th><th class='num'>Jaccard</th></tr><tr><td>Неделя 1 (17–22 июня) ↔ Неделя 2 (23–29 июня)</td><td class='num'>0.639</td></tr><tr><td>Неделя 1 (17–22 июня) ↔ Неделя 3 (30 июня – 6 июля)</td><td class='num'>0.667</td></tr><tr><td>Неделя 1 (17–22 июня) ↔ Неделя 4 (7–13 июля)</td><td class='num'>0.587</td></tr><tr><td>Неделя 1 (17–22 июня) ↔ Неделя 5 (14–20 июля)</td><td class='num'>0.613</td></tr><tr><td>Неделя 1 (17–22 июня) ↔ Неделя 6 (21–24 июля)</td><td class='num'>0.515</td></tr><tr><td>Неделя 2 (23–29 июня) ↔ Неделя 3 (30 июня – 6 июля)</td><td class='num'>0.786</td></tr><tr><td>Неделя 2 (23–29 июня) ↔ Неделя 4 (7–13 июля)</td><td class='num'>0.667</td></tr><tr><td>Неделя 2 (23–29 июня) ↔ Неделя 5 (14–20 июля)</td><td class='num'>0.667</td></tr><tr><td>Неделя 2 (23–29 июня) ↔ Неделя 6 (21–24 июля)</td><td class='num'>0.587</td></tr><tr><td>Неделя 3 (30 июня – 6 июля) ↔ Неделя 4 (7–13 июля)</td><td class='num'>0.786</td></tr><tr><td>Неделя 3 (30 июня – 6 июля) ↔ Неделя 5 (14–20 июля)</td><td class='num'>0.667</td></tr><tr><td>Неделя 3 (30 июня – 6 июля) ↔ Неделя 6 (21–24 июля)</td><td class='num'>0.639</td></tr><tr><td>Неделя 4 (7–13 июля) ↔ Неделя 5 (14–20 июля)</td><td class='num'>0.695</td></tr><tr><td>Неделя 4 (7–13 июля) ↔ Неделя 6 (21–24 июля)</td><td class='num'>0.695</td></tr><tr><td>Неделя 5 (14–20 июля) ↔ Неделя 6 (21–24 июля)</td><td class='num'>0.695</td></tr></table></div>
+
+<p style="text-align:center;color:#30363d;font-size:12px;margin-top:50px;">Динамика по периодам · Газета.Ru · 6 недель</p>
+</div>
+</body>
+</html>
