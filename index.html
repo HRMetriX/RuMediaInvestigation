@@ -141,7 +141,7 @@
             </div>
 
             <figure>
-                <iframe src="analytics/graph_analysis.html" 
+                <iframe src="analytics/news_graph.html" 
                         width="100%" height="750px" 
                         style="border: 1px solid #25252a; border-radius: 8px;"
                         loading="lazy"
@@ -153,6 +153,20 @@
                     Цвета - четыре тематических кластера, выделенных алгоритмом Louvain.
                     Размер узла - логарифм частоты упоминания. Можно перетаскивать,
                     зумировать, искать узлы через поиск (левый верхний угол).
+                </figcaption>
+                
+            </figure>
+
+                        <figure>
+                <iframe src="analytics/graph_analysis.html" 
+                        width="100%" height="700px" 
+                        style="border: 1px solid #25252a; border-radius: 8px;"
+                        loading="lazy"
+                        title="Аналитика графа новостной повестки">
+                </iframe>
+                <figcaption>
+                    Полная аналитика графа: базовые характеристики, центральности, 
+                    сообщества, клики, k-core, сравнение с модельными графами.
                 </figcaption>
             </figure>
 
