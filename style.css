@@ -129,6 +129,47 @@ h3 {
     letter-spacing: 0.02em;
 }
 
+/* --- ПОРТРЕТ АВТОРА --------------------------------------- */
+.author-card {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin: 28px 0;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.author-photo {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.author-info p {
+    margin-bottom: 4px;
+    color: var(--text);
+}
+
+.author-info p:first-child {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .author-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .author-photo {
+        width: 100px;
+        height: 100px;
+    }
+}
+
 /* --- ПАРАГРАФЫ -------------------------------------------- */
 p {
     margin-bottom: 20px;
