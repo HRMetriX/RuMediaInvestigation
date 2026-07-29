@@ -377,6 +377,79 @@ footer a {
     margin-top: 16px;
 }
 
+/* --- ТАЙМЛАЙН ---------------------------------------------- */
+.timeline {
+    margin: 40px 0;
+    padding: 20px 0;
+    position: relative;
+}
+
+.timeline-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    background: var(--border);
+}
+
+.timeline-events {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.timeline-event {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.timeline-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-dot-major {
+    width: 14px;
+    height: 14px;
+    background: #e8e0d0;
+    box-shadow: 0 0 8px rgba(201, 160, 80, 0.5);
+}
+
+.timeline-date {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
+}
+
+.timeline-text {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .timeline-events {
+        flex-wrap: wrap;
+        gap: 16px 0;
+    }
+
+    .timeline-event {
+        flex: 0 0 25%;
+    }
+
+    .timeline-text {
+        font-size: 0.68rem;
+    }
+}
+
 /* --- АДАПТИВ ---------------------------------------------- */
 @media (max-width: 768px) {
     html {
