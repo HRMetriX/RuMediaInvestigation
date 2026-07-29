@@ -35,19 +35,21 @@ body {
 
 /* --- ДИСКЛЕЙМЕР -------------------------------------------- */
 .disclaimer {
-    padding: 18px 60px;
+    padding: 20px 60px;
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    font-size: 0.82rem;
-    color: #7a7a86;
-    line-height: 1.55;
-    border-bottom: 1px solid var(--border);
-    background: rgba(212, 168, 83, 0.03);
+    gap: 14px;
+    font-size: 0.85rem;
+    color: #e8e0d0;
+    line-height: 1.6;
+    border-bottom: 1px solid var(--accent);
+    background: rgba(201, 160, 80, 0.08);
+    border-left: 4px solid var(--accent);
+    margin: 0;
 }
 
 .disclaimer-icon {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     flex-shrink: 0;
     margin-top: 1px;
 }
